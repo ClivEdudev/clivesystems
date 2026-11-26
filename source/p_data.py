@@ -4,7 +4,7 @@ from lib import *
 PD = {
  'vaqt': {
   'tag': ('Focus garden & time tracker', 'Fokus bog‘i va vaqt hisoblagichi', 'Сад фокуса и трекер времени'),
-  'short': ('Focus sessions grow an Uzbek garden: 20 plants, a bazaar, levels, daily quests and 55 awards. Works offline.', 'Fokus sessiyalari o‘zbek bog‘ini o‘stiradi: 20 ta o‘simlik, bozor, darajalar, kunlik topshiriqlar va 55 ta yutuq. Oflayn ishlaydi.', 'Сессии фокуса растят узбекский сад: 20 растений, базар, уровни, ежедневные задания и 55 наград. Работает офлайн.'),
+  'short': ('Focus sessions grow an Uzbek garden: 34 plants, a bazaar, levels, daily quests and 57 awards. Works offline.', 'Fokus sessiyalari o‘zbek bog‘ini o‘stiradi: 34 ta o‘simlik, bozor, darajalar, kunlik topshiriqlar va 57 ta yutuq. Oflayn ishlaydi.', 'Сессии фокуса растят узбекский сад: 34 растения, базар, уровни, ежедневные задания и 57 наград. Работает офлайн.'),
   'for': ('Anyone who wants to focus: students, teachers, makers', 'Diqqatini jamlamoqchi bo‘lgan har kim: o‘quvchilar, o‘qituvchilar, ijodkorlar', 'Всем, кто хочет сосредоточиться: ученикам, учителям, авторам'),
   'on': ('Any browser · installable · offline', 'Istalgan brauzer · o‘rnatiladi · oflayn', 'Любой браузер · устанавливается · офлайн'),
   'langs': ('English, Uzbek, Russian', 'Ingliz, o‘zbek, rus', 'Английский, узбекский, русский'),

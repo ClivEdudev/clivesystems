@@ -1,4 +1,4 @@
-/* Vaqt v2: focus timer and time tracker that grows an Uzbek garden. Levels, quests, a bazaar and 55 awards. No dependencies. */
+/* Vaqt v2: focus timer and time tracker that grows an Uzbek garden. Levels, quests, a bazaar and 57 awards. No dependencies. */
 (function () {
   'use strict';
   var KEY = 'clive.vaqt.v1';
@@ -236,9 +236,9 @@
     s3: ['best', 3], s7: ['best', 7], s14: ['best', 14], s30: ['best', 30], s60: ['best', 60], s100: ['best', 100],
     l60: ['longest', 60], l90: ['longest', 90], l120: ['longest', 120], l180: ['longest', 180], d120: ['maxDay', 120], d240: ['maxDay', 240], d360: ['maxDay', 360],
     p4: ['pomoDay', 4], p8: ['pomoDay', 8], early: ['early', 1], owl: ['owl', 1], weekend: ['weekend', 1], modes: ['modes', 3], iron: ['iron', 10],
-    c5: ['species', 5], c10: ['species', 10], c20: ['species', 20], gold1: ['golden', 1], gold5: ['golden', 5], leg: ['legendary', 1],
+    c5: ['species', 5], c10: ['species', 10], c20: ['species', 20], call: ['species', (window.Garden ? Garden.SPECIES.length : 34)], gold1: ['golden', 1], gold5: ['golden', 5], leg: ['legendary', 1],
     tk10: ['tasksDone', 10], tk50: ['tasksDone', 50], tags5: ['tags', 5], manual: ['manual', 1], refl10: ['rated', 10],
-    dec1: ['decor', 1], dec6: ['decor', 6], dec12: ['decor', 12], theme1: ['themes', 1], seeds10: ['seeds', 10],
+    dec1: ['decor', 1], dec6: ['decor', 6], dec12: ['decor', 12], decall: ['decor', (window.Garden ? Garden.DECOR.length : 16)], theme1: ['themes', 1], seeds10: ['seeds', 10],
     goal1: ['goalDays', 1], goal7: ['goalDays', 7], goal30: ['goalDays', 30], q10: ['quests', 10], q50: ['quests', 50], lv10: ['level', 10], lv25: ['level', 25] };
   function metrics() {
     var all = real(), ok = all.filter(good), plants = ok.filter(function (s) { return s.mode !== 'manual'; }), M = {};
@@ -374,7 +374,7 @@
     $('#pomodots').innerHTML = dots;
     var owned = Garden.SPECIES.filter(function (x) { return D.unlocked.indexOf(x.id) >= 0; }), curId = r && r.species ? r.species : s.species;
     $('#seeds').innerHTML = owned.map(function (x, k) {
-      return '<button type="button" data-sp="' + x.id + '" aria-pressed="' + (x.id === curId) + '" title="' + esc(L3(x.note)) + '"' + (r ? ' disabled' : '') + '><i class="tier" style="--tc:' + Garden.TIERS[x.tier].c + '"></i><svg viewBox="-45 -125 90 135" aria-hidden="true">' + Garden.plant(x.id, 1, { seed: 3 + k }) + '</svg>' + esc(L3(x.name)) + '</button>';
+      return '<button type="button" data-sp="' + x.id + '" aria-pressed="' + (x.id === curId) + '" title="' + esc(L3(x.note)) + '"' + (r ? ' disabled' : '') + '><i class="tier" style="--tc:' + Garden.TIERS[x.tier].c + '"></i><svg viewBox="' + Garden.box(x.id) + '" aria-hidden="true">' + Garden.plant(x.id, 1, { seed: 3 + k }) + '</svg>' + esc(L3(x.name)) + '</button>';
     }).join('');
     var cur = sp(curId);
     $('#seednote').textContent = L3(cur.note) + ' · ' + L3(Garden.TIERS[cur.tier].name) + ' · ' + C.fmt(t('v.recmin'), { n: cur.min });
@@ -785,7 +785,7 @@
       { size: clamp(Math.ceil(Math.sqrt((shown.length + D.decorOn.length) * 1.3)), 4, 12), label: pr.label, theme: D.theme, decor: D.decorOn });
     $('#g-more').textContent = list.length > max ? C.fmt(t('v.g.more'), { n: list.length - max }) : '';
     $('#g-themes').innerHTML = D.themesOwned.map(function (id) { var x = Garden.theme(id); return '<button type="button" data-th="' + id + '" style="--c:' + x.top2 + '" aria-pressed="' + (D.theme === id) + '"><i></i>' + esc(L3(x.name)) + '</button>'; }).join('');
-    $('#g-decor').innerHTML = D.decorOwned.length ? D.decorOwned.map(function (id) { var x = Garden.DECOR.filter(function (d) { return d.id === id; })[0]; return '<button type="button" data-dc="' + id + '" aria-pressed="' + (D.decorOn.indexOf(id) >= 0) + '"><svg viewBox="-40 -50 80 70" aria-hidden="true">' + Garden.decor(id) + '</svg>' + esc(L3(x.name)) + '</button>'; }).join('') : '<p class="small muted" style="margin:0">' + esc(t('v.g.nodecor')) + ' <button class="linkbtn" type="button" data-view="bazaar">' + esc(t('v.bz.h')) + '</button></p>';
+    $('#g-decor').innerHTML = D.decorOwned.length ? D.decorOwned.map(function (id) { var x = Garden.DECOR.filter(function (d) { return d.id === id; })[0]; return '<button type="button" data-dc="' + id + '" aria-pressed="' + (D.decorOn.indexOf(id) >= 0) + '"><svg viewBox="-42 -74 84 94" aria-hidden="true">' + Garden.decor(id) + '</svg>' + esc(L3(x.name)) + '</button>'; }).join('') : '<p class="small muted" style="margin:0">' + esc(t('v.g.nodecor')) + ' <button class="linkbtn" type="button" data-view="bazaar">' + esc(t('v.bz.h')) + '</button></p>';
     $$('#g-decor [data-view]').forEach(function (b) { b.addEventListener('click', function () { go('bazaar'); }); });
     var hasSample = D.sessions.some(function (s) { return s.sample; });
     $('#g-sample').hidden = D.sessions.length > 0; $('#g-unsample').hidden = !hasSample;
@@ -867,13 +867,13 @@
     var L = C.S.lang, h = '';
     if (BZ === 'seeds') h = Garden.SPECIES.map(function (x, k) {
       var own = D.unlocked.indexOf(x.id) >= 0, tc = Garden.TIERS[x.tier].c;
-      return '<article class="card item ' + x.tier + (own ? ' owned' : '') + '" style="--tc:' + tc + '"><div class="pv"><svg viewBox="-50 -128 100 140" aria-hidden="true">' + Garden.plant(x.id, 1, { seed: 3 + k }) + '</svg></div>' +
+      return '<article class="card item ' + x.tier + (own ? ' owned' : '') + '" style="--tc:' + tc + '"><div class="pv"><svg viewBox="' + Garden.box(x.id) + '" aria-hidden="true">' + Garden.plant(x.id, 1, { seed: 3 + k }) + '</svg></div>' +
         '<span class="tier">' + esc(L3(Garden.TIERS[x.tier].name)) + '</span><h3>' + esc(L3(x.name)) + '</h3><p class="muted">' + esc(L3(x.note)) + '</p><div class="meta"><span>' + esc(C.fmt(t('v.bz.mins'), { n: x.min })) + '</span>' + (x.cost ? '<span>' + coinI() + ' ' + x.cost + '</span>' : '<span>' + esc(t('pp.vaqt.free')) + '</span>') + '</div>' +
         (own ? '<button type="button" class="btn ghost sm" data-act="plant" data-id="' + x.id + '">' + C.icon('sprout') + '<span>' + esc(D.settings.species === x.id ? t('v.bz.inuse') : t('v.bz.plant')) + '</span></button>' : buyBtn('seed', x.id, x.cost)) + '</article>';
     }).join('');
     else if (BZ === 'decor') h = Garden.DECOR.map(function (x) {
       var own = D.decorOwned.indexOf(x.id) >= 0, on = D.decorOn.indexOf(x.id) >= 0;
-      return '<article class="card item' + (own ? ' owned' : '') + '" style="--tc:var(--amber)"><div class="pv"><svg viewBox="-46 -56 92 80" aria-hidden="true">' + Garden.tile(0, 6, 80, 'grass', 8, Garden.theme(D.theme)) + '<g transform="translate(0 6)">' + Garden.decor(x.id) + '</g></svg></div>' +
+      return '<article class="card item' + (own ? ' owned' : '') + '" style="--tc:var(--amber)"><div class="pv"><svg viewBox="-46 -76 92 100" aria-hidden="true">' + Garden.tile(0, 6, 80, 'grass', 8, Garden.theme(D.theme)) + '<g transform="translate(0 6)">' + Garden.decor(x.id) + '</g></svg></div>' +
         '<h3>' + esc(L3(x.name)) + '</h3><div class="meta"><span>' + coinI() + ' ' + x.cost + '</span>' + (own ? '<span>' + esc(t('v.bz.owned')) + '</span>' : '') + '</div>' +
         (own ? '<button type="button" class="btn ghost sm" data-act="toggle" data-id="' + x.id + '" aria-pressed="' + on + '">' + C.icon(on ? 'eye' : 'x') + '<span>' + esc(on ? t('v.bz.show') : t('v.bz.hide')) + '</span></button>' : buyBtn('decor', x.id, x.cost)) + '</article>';
     }).join('');
@@ -967,7 +967,7 @@
     } else ins.push(t('v.s.none'));
     $('#s-ins').innerHTML = ins.map(function (x) { return '<li>' + C.icon('sparkle') + '<span>' + esc(x) + '</span></li>'; }).join('');
     var cnt = {}, gold = {}; ok.forEach(function (s) { if (s.species) { cnt[s.species] = (cnt[s.species] || 0) + 1; if (s.golden) gold[s.species] = 1; } });
-    $('#s-coll').innerHTML = Garden.SPECIES.map(function (x, k) { return '<div class="' + (cnt[x.id] ? '' : 'no') + '"><svg viewBox="-45 -125 90 135" aria-hidden="true">' + Garden.plant(x.id, 1, { seed: 2 + k, golden: !!gold[x.id] }) + '</svg><b>' + esc(L3(x.name)) + '</b>× ' + (cnt[x.id] || 0) + '</div>'; }).join('');
+    $('#s-coll').innerHTML = Garden.SPECIES.map(function (x, k) { return '<div class="' + (cnt[x.id] ? '' : 'no') + '"><svg viewBox="' + Garden.box(x.id) + '" aria-hidden="true">' + Garden.plant(x.id, 1, { seed: 2 + k, golden: !!gold[x.id] }) + '</svg><b>' + esc(L3(x.name)) + '</b>× ' + (cnt[x.id] || 0) + '</div>'; }).join('');
   }
 
   /* ---------------------------------------------------------------- tasks */
@@ -1074,7 +1074,7 @@
     if (!list.length) { $('#l-list').innerHTML = '<li class="empty" style="display:block">' + esc(t('v.l.empty')) + '</li>'; return; }
     $('#l-list').innerHTML = list.slice().reverse().map(function (s) {
       var tg = tag(s.tag), tk = task(s.task), m = mins(s);
-      var desc = (s.mode === 'manual' ? '<span class="chip">' + C.icon('pen') + esc(t('v.l.manual')) + '</span>' : '<svg class="p" viewBox="-45 -125 90 135" aria-hidden="true">' + Garden.plant(s.species || 'lola', 1, { withered: !good(s), golden: s.golden, seed: 3 }) + '</svg><b>' + esc(pname(s.species)) + (s.golden ? ' ★' : '') + '</b>') +
+      var desc = (s.mode === 'manual' ? '<span class="chip">' + C.icon('pen') + esc(t('v.l.manual')) + '</span>' : '<svg class="p" viewBox="' + Garden.box(s.species || 'lola') + '" aria-hidden="true">' + Garden.plant(s.species || 'lola', 1, { withered: !good(s), golden: s.golden, seed: 3 }) + '</svg><b>' + esc(pname(s.species)) + (s.golden ? ' ★' : '') + '</b>') +
         (tg ? '<span class="chip c" style="--c:' + esc(tg.color) + '">' + esc(tname(tg)) + '</span>' : '') + (!good(s) ? '<span class="chip c" style="--c:var(--rose)">' + esc(t('v.l.withered')) + '</span>' : '') +
         (s.rating ? '<span class="chip c" style="--c:var(--green)">' + esc(t('v.rate.r' + s.rating)) + '</span>' : '') +
         (tk ? '<span class="small muted">' + esc(tk.title) + '</span>' : '') + ((s.note || s.intent) ? '<span class="note">' + esc(s.note || s.intent) + '</span>' : '');

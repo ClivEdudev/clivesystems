@@ -206,12 +206,12 @@ S = [
  ('v.ob.2t','Stay with it','Diqqatingizni saqlang','Не отвлекайтесь'),
  ('v.ob.2p','Your plant grows while you work. In strict deep focus, leaving this tab for too long makes it wilt.','Siz ishlayotganingizda o‘simlik o‘sadi. Qat’iy chuqur fokusda varaqni uzoq tark etsangiz, u so‘liydi.','Растение растёт, пока вы работаете. В строгом режиме долгий уход с вкладки — и оно вянет.'),
  ('v.ob.3t','Grow your world','Dunyoingizni o‘stiring','Растите свой мир'),
- ('v.ob.3p','Earn coins, level up, finish daily quests, unlock 55 awards and decorate your garden.','Tanga yig‘ing, darajangizni oshiring, kunlik topshiriqlarni bajaring, 55 ta yutuqni oching va bog‘ingizni bezang.','Копите монеты, растите в уровне, выполняйте задания, открывайте 55 наград и украшайте сад.'),
+ ('v.ob.3p','Earn coins, level up, finish daily quests, unlock 57 awards and decorate your garden.','Tanga yig‘ing, darajangizni oshiring, kunlik topshiriqlarni bajaring, 57 ta yutuqni oching va bog‘ingizni bezang.','Копите монеты, растите в уровне, выполняйте задания, открывайте 57 наград и украшайте сад.'),
  ('v.ob.next','Next','Keyingi','Далее'),('v.ob.skip','Skip','O‘tkazib yuborish','Пропустить'),('v.ob.go','Plant my first seed','Birinchi urug‘imni ekish','Посадить первое семя'),
  ('v.keys','Keyboard: Space start/pause · 1 2 3 modes · ↑↓ ±5 min · F full screen · M sounds · G B A garden, bazaar, awards','Klaviatura: Space boshlash/pauza · 1 2 3 rejimlar · ↑↓ ±5 daq · F to‘liq ekran · M ovozlar · G B A bog‘, bozor, yutuqlar','Клавиши: Space старт/пауза · 1 2 3 режимы · ↑↓ ±5 мин · F полный экран · M звуки · G B A сад, базар, награды'),
 ]
 
-# 55 awards: (id, icon, tier, category, en, uz, ru, desc_en, desc_uz, desc_ru)
+# 57 awards: (id, icon, tier, category, en, uz, ru, desc_en, desc_uz, desc_ru)
 AW = [
  ('g1','sprout','bronze','growth','First sprout','Birinchi nihol','Первый росток','Grow your first plant','Birinchi o‘simligingizni o‘stiring','Вырастите первое растение'),
  ('g10','leaf','bronze','growth','Little orchard','Kichik bog‘','Маленький сад','Grow 10 plants','10 ta o‘simlik o‘stiring','Вырастите 10 растений'),
@@ -247,7 +247,8 @@ AW = [
  ('iron','shield','gold','habit','Iron will','Temir iroda','Железная воля','10 strict sessions in a row without wilting','Ketma-ket 10 ta qat’iy sessiya, so‘lishsiz','10 строгих сессий подряд без увядания'),
  ('c5','grid','bronze','coll','Five kinds','Besh tur','Пять видов','Grow 5 different plants','5 xil o‘simlik o‘stiring','Вырастите 5 разных растений'),
  ('c10','grid','silver','coll','Ten kinds','O‘n tur','Десять видов','Grow 10 different plants','10 xil o‘simlik o‘stiring','Вырастите 10 разных растений'),
- ('c20','grid','diamond','coll','Complete collection','To‘liq to‘plam','Полная коллекция','Grow all 20 plants','20 ta o‘simlikning hammasini o‘stiring','Вырастите все 20 растений'),
+ ('c20','grid','gold','coll','Twenty kinds','Yigirma tur','Двадцать видов','Grow 20 different plants','20 xil o‘simlik o‘stiring','Вырастите 20 разных растений'),
+ ('call','grid','diamond','coll','Complete collection','To‘liq to‘plam','Полная коллекция','Grow all 34 plants','34 ta o‘simlikning hammasini o‘stiring','Вырастите все 34 растения'),
  ('gold1','sparkle','gold','coll','Golden touch','Oltin teginish','Золотое касание','Grow a golden plant','Oltin o‘simlik o‘stiring','Вырастите золотое растение'),
  ('gold5','sparkle','platinum','coll','Gold rush','Oltin isitmasi','Золотая лихорадка','Grow 5 golden plants','5 ta oltin o‘simlik o‘stiring','Вырастите 5 золотых растений'),
  ('leg','star','platinum','coll','Legend','Afsona','Легенда','Grow a legendary plant','Afsonaviy o‘simlik o‘stiring','Вырастите легендарное растение'),
@@ -258,7 +259,8 @@ AW = [
  ('refl10','heart','silver','org','Reflective','O‘ylovchi','Вдумчивый','Rate 10 sessions','10 ta sessiyaga baho bering','Оцените 10 сессий'),
  ('dec1','store','bronze','bazaar','First decoration','Birinchi bezak','Первое украшение','Buy a decoration','Bezak sotib oling','Купите украшение'),
  ('dec6','store','silver','bazaar','Decorator','Bezakchi','Декоратор','Own 6 decorations','6 ta bezakka ega bo‘ling','Соберите 6 украшений'),
- ('dec12','store','gold','bazaar','Bazaar regular','Bozor doimiysi','Завсегдатай базара','Own all 12 decorations','12 ta bezakning hammasiga ega bo‘ling','Соберите все 12 украшений'),
+ ('dec12','store','gold','bazaar','Bazaar regular','Bozor doimiysi','Завсегдатай базара','Own 12 decorations','12 ta bezakka ega bo‘ling','Соберите 12 украшений'),
+ ('decall','store','platinum','bazaar','The whole bazaar','Butun bozor','Весь базар','Own all 16 decorations','16 ta bezakning hammasiga ega bo‘ling','Соберите все 16 украшений'),
  ('theme1','image','silver','bazaar','New scenery','Yangi manzara','Новый пейзаж','Unlock a new scenery','Yangi manzarani oching','Откройте новый пейзаж'),
  ('seeds10','sprout','gold','bazaar','Seed merchant','Urug‘ savdogari','Торговец семенами','Own 10 kinds of seed','10 xil urug‘ga ega bo‘ling','Соберите 10 видов семян'),
  ('goal1','target','bronze','goal','Goal keeper','Maqsadga sodiq','Держу цель','Reach your daily goal','Kunlik maqsadingizga erishing','Достигните дневной цели'),
@@ -277,7 +279,7 @@ def vt(k, tag='span', cls='', attrs=''):
     a = f' {attrs}' if attrs else ''
     return f'<{tag}{c}{a} data-i18n="{k}">{esc(en)}</{tag}>'
 
-ASSET_V = '2'  # bump with sw.js CACHE when Vaqt assets change
+ASSET_V = '3'  # bump with sw.js CACHE when Vaqt assets change
 
 def html():
     for k,en,uz,ru in S: J(k,en,uz,ru)
@@ -492,7 +494,7 @@ def html():
 '''
     head_extra = '<link rel="manifest" href="manifest.webmanifest">\n<meta name="apple-mobile-web-app-capable" content="yes">\n<meta name="apple-mobile-web-app-title" content="Vaqt">\n<link rel="stylesheet" href="vaqt.css">\n'
     out = page('vaqt', R, 'pt.vaqt', 'Vaqt · focus garden', 'Vaqt · fokus bog‘i', 'Vaqt · сад фокуса',
-               'Vaqt: a focus timer and time tracker that grows an Uzbek garden. 20 plants, a bazaar, 55 awards. Free, offline, in English, Uzbek and Russian.',
+               'Vaqt: a focus timer and time tracker that grows an Uzbek garden. 34 plants, a bazaar, 57 awards. Free, offline, in English, Uzbek and Russian.',
                body, '', ['assets/js/garden.js', 'vaqt/catalog.js', 'vaqt/vaqt.js'], bare=True, extra_head=head_extra)
     for a in ('assets/css/core.css', 'assets/js/i18n.js', 'assets/js/core.js', 'assets/js/garden.js', 'vaqt/catalog.js', 'vaqt/vaqt.js'):
         out = out.replace(R + a + '"', R + a + '?v=' + ASSET_V + '"')

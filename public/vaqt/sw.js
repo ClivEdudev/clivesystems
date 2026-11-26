@@ -1,6 +1,6 @@
 /* Vaqt service worker: the app works offline after the first visit. Bump CACHE when files change. */
-var CACHE = 'vaqt-2026-11-26-v2';
-var V = '?v=2';
+var CACHE = 'vaqt-2026-11-27-v3';
+var V = '?v=3';
 var SHELL = ['./', 'index.html', 'vaqt.css' + V, 'catalog.js' + V, 'vaqt.js' + V, 'icon.svg', 'icon-192.png', 'icon-512.png', 'manifest.webmanifest',
   '../assets/css/core.css' + V, '../assets/js/core.js' + V, '../assets/js/i18n.js' + V, '../assets/js/garden.js' + V];
 self.addEventListener('install', function (e) {

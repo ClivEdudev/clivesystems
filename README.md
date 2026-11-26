@@ -28,11 +28,11 @@ Site-wide: language switch (EN/UZ/RU), settings drawer (night/day/auto, 7 accent
 ## Vaqt, the focus garden
 
 - **Timer** (drag the dial, arrow keys or one-tap presets), **Pomodoro** with short and long breaks, and **Flow** that counts up.
-- **20 Uzbek plants in five rarity tiers** (common → legendary). Lola and paxta are free; the rest are bought in the Bazaar. Bigger plants need longer sessions. About 1 session in 25 grows a **golden** plant.
-- **Bazaar**: seeds, 12 decorations, 6 sceneries for the garden, and streak freezes (hold up to two; they cover missed days automatically).
+- **34 Uzbek plants in five rarity tiers** (common → legendary), drawn in `public/assets/js/garden.js` with light from the upper left (shaded leaves, layered crowns, bark, fruit glints). Lola and paxta are free; the rest are bought in the Bazaar. Bigger plants need longer sessions. About 1 session in 25 grows a **golden** plant.
+- **Bazaar**: seeds, 16 decorations, 6 sceneries for the garden, and streak freezes (hold up to two; they cover missed days automatically).
 - **Levels and titles**: every focused minute is 1 XP (Seed → Sprout → Sapling → Gardener → Master gardener → Elder chinor). Each level-up pays coins.
 - **Daily quests**: three per day, picked from a pool, claimed for coins.
-- **55 awards** in nine categories and five tiers (bronze 15 → diamond 400 coins), with filters and progress bars. The list lives in `AW` in `source/p_vaqt.py`; `build.py` writes it to `public/vaqt/catalog.js`.
+- **57 awards** in nine categories and five tiers (bronze 15 → diamond 400 coins), with filters and progress bars. The list lives in `AW` in `source/p_vaqt.py`; `build.py` writes it to `public/vaqt/catalog.js`.
 - **Living dial**: the sky inside the dial follows the local time of day; breaks show a breathing circle and a stretch tip.
 - **After each session**: coins, XP bar, a 1–5 focus rating and a note.
 - **Deep focus**: *Strict* wilts the plant if you leave the tab longer than the grace time (15 s by default); *Gentle* only counts interruptions; *Off*. Cancelling in the first 10 seconds costs nothing.
