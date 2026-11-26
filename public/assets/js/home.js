@@ -46,7 +46,7 @@
     if (mg && window.Garden) {
       var items = [], data = C.load('clive.vaqt.v1', null);
       if (data && data.sessions && data.sessions.length) {
-        data.sessions.filter(function (s) { return s.mode !== 'manual' && s.mode !== 'break'; }).slice(-18).forEach(function (s) { items.push({ species: s.species || 'lola', withered: s.status === 'withered' }); });
+        data.sessions.filter(function (s) { return s.mode !== 'manual' && s.mode !== 'break'; }).slice(-18).forEach(function (s) { items.push({ species: s.species || 'lola', withered: s.status === 'withered', golden: !!s.golden }); });
       }
       if (items.length < 3) items = ['chinor', 'lola', 'anor', 'paxta', 'orik', 'lola', 'archa', 'uzum', 'tut', 'lola', 'paxta', 'anor', 'orik', 'lola'].map(function (s) { return { species: s }; });
       mg.innerHTML = Garden.scene(items, { size: 5, animate: true, plantScale: .66 });

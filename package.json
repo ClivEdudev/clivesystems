@@ -1,0 +1,13 @@
+{
+  "name": "clive-orbit",
+  "private": true,
+  "type": "module",
+  "description": "Clive's whole ecosystem in one site: ClivEdu, ClivEdu Class, Sprachwerk, Vault Studio, Vaqt and the shop.",
+  "scripts": {
+    "build:text": "python3 source/build.py",
+    "serve": "python3 -m http.server 8765 --directory public"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^11.1.12"
+  }
+}

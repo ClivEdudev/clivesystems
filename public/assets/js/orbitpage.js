@@ -12,7 +12,7 @@
     });
     var isl = document.getElementById('vq-island');
     if (isl && window.Garden) {
-      var sp = ['lola', 'anor', 'orik', 'chinor', 'uzum', 'paxta', 'tut', 'archa'], i = 0, p = 0;
+      var sp = ['lola', 'anor', 'zarang', 'chinor', 'uzum', 'nilufar', 'kungaboqar', 'archa'], i = 0, p = 0;
       var reduced = document.documentElement.getAttribute('data-motion') === 'reduced';
       var draw = function () { isl.innerHTML = Garden.island(sp[i], reduced ? 1 : p, { seed: 5 + i }); };
       if (reduced) { draw(); return; }
