@@ -201,13 +201,49 @@
   }, { passive: true });
 
   function revealInit() {
+    /* stagger cards inside the same grid */
+    $$('.grid').forEach(function (g) { var k = 0; Array.prototype.forEach.call(g.children, function (c) { if (c.hasAttribute('data-reveal') && !+c.getAttribute('data-reveal')) { c.setAttribute('data-reveal', String(Math.min(k, 6) * 70)); } k++; }); });
     var els = $$('[data-reveal]');
     if (!('IntersectionObserver' in window) || root.getAttribute('data-motion') === 'reduced') { els.forEach(function (e) { e.classList.add('in'); }); return; }
     var io = new IntersectionObserver(function (en) {
-      en.forEach(function (x) { if (x.isIntersecting) { var d = +(x.target.getAttribute('data-reveal') || 0); setTimeout(function () { x.target.classList.add('in'); }, d); io.unobserve(x.target); } });
+      en.forEach(function (x) { if (x.isIntersecting) { var d = +(x.target.getAttribute('data-reveal') || 0); setTimeout(function () { x.target.classList.add('in'); countUp(x.target); }, d); io.unobserve(x.target); } });
     }, { rootMargin: '0px 0px -8% 0px', threshold: .06 });
     els.forEach(function (e) { io.observe(e); });
     setTimeout(function () { els.forEach(function (e) { e.classList.add('in'); }); }, 4000);
+  }
+
+  /* numbers count up the first time they appear */
+  function countUp(scope) {
+    var list = scope.matches && scope.matches('.kpi b') ? [scope] : $$('.kpi b', scope);
+    list.forEach(function (b) {
+      if (b._counted) return; b._counted = true;
+      var txt = b.textContent.trim(); if (!/^\d{1,6}$/.test(txt) || root.getAttribute('data-motion') === 'reduced') return;
+      var to = +txt, t0 = performance.now(), dur = 1100;
+      (function step(now) { var p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(1 - p, 3); b.textContent = Math.round(to * e); if (p < 1) requestAnimationFrame(step); })(t0);
+    });
+  }
+
+  /* scroll progress, spotlight, back to top */
+  function chromeInit() {
+    var nav = $('.nav'), tt = document.createElement('button');
+    tt.className = 'totop'; tt.setAttribute('aria-label', t('a.top', 'Back to top')); tt.innerHTML = icon('arrow');
+    tt.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: root.getAttribute('data-motion') === 'reduced' ? 'auto' : 'smooth' }); });
+    if (nav) document.body.appendChild(tt);
+    var ticking = false;
+    function onScroll() {
+      if (ticking) return; ticking = true;
+      requestAnimationFrame(function () {
+        var h = document.documentElement.scrollHeight - innerHeight, p = h > 0 ? Math.min(1, scrollY / h) : 0;
+        if (nav) nav.style.setProperty('--sp', p.toFixed(4));
+        tt.classList.toggle('on', scrollY > 1200);
+        ticking = false;
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+    if (window.matchMedia && matchMedia('(hover:hover)').matches && !document.querySelector('.spot')) {
+      var sp = document.createElement('div'); sp.className = 'spot'; sp.setAttribute('aria-hidden', 'true'); document.body.insertBefore(sp, document.body.firstChild);
+      document.addEventListener('pointermove', function (e) { sp.style.setProperty('--px', e.clientX + 'px'); sp.style.setProperty('--py', e.clientY + 'px'); }, { passive: true });
+    }
   }
 
   /* ---------- command palette ---------- */
@@ -309,6 +345,6 @@
 
   /* ---------- boot ---------- */
   window.Clive = { t: t, fmt: fmt, set: set, S: S, toast: toast, copy: copy, esc: esc, tash: tash, hm: hm, pad: pad, nextClass: nextClass, CLASSES: CLASSES, DAYS: DAYS, DSHORT: DSHORT, dur: dur, vaqt: vaqt, ping: ping, load: load, save: save, icon: icon, root: ROOT, $: $, $$: $$, starBurst: starBurst };
-  function boot() { window.Clive.booted = true; applySettings(); applyLang(); navInit(); revealInit(); document.dispatchEvent(new CustomEvent('clive:ready')); }
+  function boot() { window.Clive.booted = true; applySettings(); applyLang(); navInit(); revealInit(); chromeInit(); document.dispatchEvent(new CustomEvent('clive:ready')); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 })();
