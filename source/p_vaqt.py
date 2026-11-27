@@ -166,10 +166,13 @@ S = [
  ('v.l.badfile','That file isn’t a Vaqt or Clive backup.','Bu fayl Vaqt yoki Clive zaxirasi emas.','Это не копия Vaqt или Clive.'),
  ('v.l.dur','Minutes','Daqiqalar','Минуты'),
  # sounds
- ('v.snd.rain','Rain','Yomg‘ir','Дождь'),('v.snd.brown','Brown noise','Jigarrang shovqin','Коричневый шум'),('v.snd.ocean','Waves','To‘lqinlar','Волны'),
- ('v.snd.fire','Fireplace','Gulxan','Камин'),('v.snd.wind','Wind','Shamol','Ветер'),('v.snd.clock','Clock','Soat','Часы'),
+ ('v.snd.rain','Rain drops','Yomg‘ir tomchilari','Капли дождя'),('v.snd.thunder','Thunderstorm','Momaqaldiroq','Гроза'),('v.snd.river','Mountain stream','Tog‘ soyi','Горный ручей'),
+ ('v.snd.ocean','Ocean waves','Dengiz to‘lqinlari','Морские волны'),('v.snd.fire','Campfire','Gulxan','Костёр'),('v.snd.wind','Wind in the trees','Daraxtlardagi shamol','Ветер в деревьях'),
+ ('v.snd.birds','Birdsong','Qushlar sayrashi','Пение птиц'),('v.snd.night','Night crickets','Tungi chirildoqlar','Ночные сверчки'),('v.snd.chimes','Wind chimes','Shamol qo‘ng‘iroqchalari','Музыка ветра'),
+ ('v.snd.clock','Ticking clock','Soat chiqillashi','Тиканье часов'),('v.snd.all','All sounds','Barcha ovozlar','Все звуки'),
+ ('v.snd.err','Could not load that sound. Check your connection and try again.','Ovozni yuklab bo‘lmadi. Internetni tekshirib, qayta urinib ko‘ring.','Не удалось загрузить звук. Проверьте соединение и попробуйте снова.'),
  ('v.snd.master','Master volume','Umumiy ovoz','Общая громкость'),('v.snd.only','Play only while a session runs','Faqat sessiya ketayotganda chalish','Играть только во время сессии'),
- ('v.snd.stop','Stop all','Hammasini to‘xtatish','Остановить всё'),('v.snd.note','Every sound is made live in your browser. Nothing is downloaded.','Har bir ovoz brauzeringizda jonli yaratiladi. Hech narsa yuklab olinmaydi.','Каждый звук создаётся прямо в браузере. Ничего не скачивается.'),
+ ('v.snd.stop','Stop all','Hammasini to‘xtatish','Остановить всё'),('v.snd.note','Real recordings of rain, water, fire and nature. Mix as many as you like. Each one loads the first time you play it, then works offline.','Yomg‘ir, suv, olov va tabiatning haqiqiy yozuvlari. Istaganingizcha aralashtiring. Har biri birinchi marta yoqilganda yuklanadi, keyin oflayn ishlaydi.','Настоящие записи дождя, воды, огня и природы. Смешивайте сколько угодно. Каждая загружается при первом включении, а потом работает офлайн.'),
  # prefs
  ('v.p.durs','Durations','Davomiyliklar','Длительность'),('v.p.focus','Focus','Fokus','Фокус'),('v.p.short','Short break','Qisqa tanaffus','Короткий перерыв'),('v.p.long','Long break','Uzun tanaffus','Длинный перерыв'),
  ('v.p.rounds','Rounds before a long break','Uzun tanaffusgacha raundlar','Раундов до длинного перерыва'),
@@ -279,7 +282,7 @@ def vt(k, tag='span', cls='', attrs=''):
     a = f' {attrs}' if attrs else ''
     return f'<{tag}{c}{a} data-i18n="{k}">{esc(en)}</{tag}>'
 
-ASSET_V = '3'  # bump with sw.js CACHE when Vaqt assets change
+ASSET_V = '4'  # bump with sw.js CACHE when Vaqt assets change
 
 def html():
     for k,en,uz,ru in S: J(k,en,uz,ru)
@@ -426,7 +429,7 @@ def html():
 
 <section class="view" id="v-sounds" hidden>
 <div class="vhead"><h1>{T('v.snd.h','Sounds','Ovozlar','Звуки')}</h1><button class="btn ghost sm" id="snd-stop">{ic('stop')}<span data-i18n="v.snd.stop">Stop all</span></button></div>
-<p class="muted" data-i18n="v.snd.note">Every sound is made live in your browser. Nothing is downloaded.</p>
+<p class="muted" data-i18n="v.snd.note">Real recordings of rain, water, fire and nature. Mix as many as you like. Each one loads the first time you play it, then works offline.</p>
 <div class="card row mt1 sndm"><label class="fl" style="flex:1"><span data-i18n="v.snd.master">Master volume</span><input type="range" id="snd-master" min="0" max="1" step="0.01"></label><label class="sw"><input type="checkbox" id="snd-only"><i></i><span data-i18n="v.snd.only">Play only while a session runs</span></label></div>
 <div class="grid sgrid mt2" id="snd-grid"></div>
 </section>
