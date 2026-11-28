@@ -39,7 +39,7 @@ Site-wide: language switch (EN/UZ/RU), settings drawer (night/day/auto, 7 accent
 - **Garden** by day, week, month, year or all time, in any owned scenery and with decorations; save it as an image.
 - **Stats**: 12 KPIs, week by tag, tag breakdown, month calendar, best hours, 26-week heatmap, insights, seed collection.
 - **Tasks** linked to sessions, **time log** with a 24-hour timeline, manual entries, edit/delete with undo, CSV export, backup import/export.
-- **Ambient sounds** made live with Web Audio (rain, brown noise, waves, fireplace, wind, clock) with a mixer.
+- **Ambient sounds**: ten real recordings in `public/vaqt/sounds/` (rain drops, thunderstorm, mountain stream, ocean waves, campfire, wind in the trees, birdsong, night crickets, wind chimes, ticking clock), each trimmed into a seamless loop and played with Web Audio through a soft limiter. They load on first play and are cached for offline use. Sources and licences: `public/vaqt/sounds/CREDITS.md`.
 - Welcome tour, confetti, haptics on phones, chime, optional system notifications, screen wake lock, full-screen zen mode, a floating **mini timer** (Chrome's Document Picture-in-Picture), a live favicon and tab title.
 - **Works offline** and installs like an app (`vaqt/sw.js`, `vaqt/manifest.webmanifest`). When you change Vaqt files, bump `ASSET_V` in `source/p_vaqt.py` and `CACHE`/`V` in `public/vaqt/sw.js` so returning visitors get the new version.
 - “Load a sample fortnight” fills an empty garden for demos; sample data is marked, removable, and never counts towards awards, levels or quests.
