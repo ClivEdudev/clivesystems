@@ -68,7 +68,8 @@
     function sl(dow, p, s, t, par) { return { id: uid(), dow: dow, period: p, subject: s, type: t, parity: par || 'all' }; }
     return {
       v: 1, created: Date.now(), subjects: subj,
-      periods: [['08:30', '09:50'], ['10:00', '11:20'], ['11:30', '12:50'], ['13:30', '14:50'], ['15:00', '16:20'], ['16:30', '17:50']],
+      /* 80-minute pairs, 10-minute breaks, lunch 11:20–12:00 */
+      periods: [['08:30', '09:50'], ['10:00', '11:20'], ['12:00', '13:20'], ['13:30', '14:50'], ['15:00', '16:20'], ['16:30', '17:50']],
       /* week A starts on this Monday: the alternating Thursday ICT lecture happens in A weeks */
       parityAnchor: '2026-11-30',
       slots: [
@@ -88,6 +89,7 @@
     if (!d || !d.subjects) return seed();
     var f = seed();
     ['tasks', 'notes', 'events', 'goals', 'offDays', 'slots', 'periods'].forEach(function (k) { if (!Array.isArray(d[k])) d[k] = f[k]; });
+    if (d.periods[2] && d.periods[2][0] === '11:30' && d.periods[2][1] === '12:50') d.periods[2] = ['12:00', '13:20'];
     d.settings = Object.assign(f.settings, d.settings || {}); d.cancelled = d.cancelled || {}; d.fired = d.fired || {};
     return d;
   }
