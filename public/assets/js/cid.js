@@ -20,9 +20,9 @@
       hi: 'Welcome back', pic: 'Change picture', editname: 'Edit name', flip: 'Turn the card', out: 'Sign out', outall: 'Sign out on every device',
       outallq: 'Sign out on every phone and computer where this c-ID is open?', yes: 'Yes, sign out everywhere', keep: 'Keep them',
       synced: 'Your Vaqt garden, Reja planner, words and settings save to this c‑ID.', syncnow: 'Saved', fromclass: 'English points come from clivedu.me',
-      pick: 'Your picture', anime: 'Anime', real: 'Realistic', mine: 'My photo', upload: 'Choose a photo', uploadp: 'Square crop, saved small. Only you can see your photo; it is never public.',
+      pick: 'Your picture', girls: 'Girls', boys: 'Boys', mine: 'My photo', upload: 'Choose a photo', uploadp: 'Square crop, saved small. Only you can see your photo; it is never public.',
       save: 'Save', saving: 'Saving…', remove: 'Remove photo', toobig: 'That photo could not be used. Try another one.', saved: 'Saved',
-      newname: 'Your name on the card', namesave: 'Save name', realnote: 'Realistic faces are AI-generated. None of them is a real person.',
+      newname: 'Your name on the card', namesave: 'Save name', realnote: 'These faces are AI-generated. None of them is a real person.',
       back: 'Back of the card', constellation: 'Your number as a constellation', belongs: 'This card belongs to', worksonly: 'It works only while you are signed in with Telegram.',
       daily: 'daily challenges', games: 'games played', best: 'best game', plants: 'plants grown', quizzes: 'quizzes', copy: 'Copy number', copied: 'c-ID number copied',
       rk: ['Stardust', 'Comet', 'Moon', 'Planet', 'Star', 'Nova', 'Galaxy']
@@ -40,9 +40,9 @@
       hi: 'Qaytganingiz bilan', pic: 'Rasmni o‘zgartirish', editname: 'Ismni o‘zgartirish', flip: 'Kartani aylantirish', out: 'Chiqish', outall: 'Barcha qurilmalardan chiqish',
       outallq: 'Bu c-ID ochiq turgan barcha telefon va kompyuterlardan chiqilsinmi?', yes: 'Ha, hammasidan chiqish', keep: 'Qoldirish',
       synced: 'Vaqt bog‘ingiz, Reja rejalashtirgichi, so‘zlar va sozlamalar shu c‑ID’ga saqlanadi.', syncnow: 'Saqlandi', fromclass: 'Ingliz tili ballari clivedu.me’dan',
-      pick: 'Rasmingiz', anime: 'Anime', real: 'Realistik', mine: 'Mening rasmim', upload: 'Rasm tanlash', uploadp: 'Kvadrat qilib qirqiladi va kichik saqlanadi. Rasmingizni faqat siz ko‘rasiz, u hech qachon ommaga ochilmaydi.',
+      pick: 'Rasmingiz', girls: 'Qizlar', boys: 'O‘g‘illar', mine: 'Mening rasmim', upload: 'Rasm tanlash', uploadp: 'Kvadrat qilib qirqiladi va kichik saqlanadi. Rasmingizni faqat siz ko‘rasiz, u hech qachon ommaga ochilmaydi.',
       save: 'Saqlash', saving: 'Saqlanmoqda…', remove: 'Rasmni o‘chirish', toobig: 'Bu rasmni ishlatib bo‘lmadi. Boshqasini tanlang.', saved: 'Saqlandi',
-      newname: 'Kartadagi ismingiz', namesave: 'Ismni saqlash', realnote: 'Realistik yuzlar sun’iy intellekt yaratgan. Ularning hech biri haqiqiy odam emas.',
+      newname: 'Kartadagi ismingiz', namesave: 'Ismni saqlash', realnote: 'Bu yuzlarni sun’iy intellekt yaratgan. Ularning hech biri haqiqiy odam emas.',
       back: 'Kartaning orqasi', constellation: 'Raqamingiz yulduz turkumi ko‘rinishida', belongs: 'Bu karta egasi', worksonly: 'U faqat Telegram orqali kirganingizda ishlaydi.',
       daily: 'kunlik sinov', games: 'o‘yin', best: 'eng yaxshi o‘yin', plants: 'o‘simlik', quizzes: 'test', copy: 'Raqamni nusxalash', copied: 'c-ID raqami nusxalandi',
       rk: ['Yulduz changi', 'Kometa', 'Oy', 'Sayyora', 'Yulduz', 'Nova', 'Galaktika']
@@ -60,9 +60,9 @@
       hi: 'С возвращением', pic: 'Сменить фото', editname: 'Изменить имя', flip: 'Перевернуть карту', out: 'Выйти', outall: 'Выйти на всех устройствах',
       outallq: 'Выйти на всех телефонах и компьютерах, где открыт этот c-ID?', yes: 'Да, выйти везде', keep: 'Оставить',
       synced: 'Сад Vaqt, планировщик Reja, слова и настройки сохраняются в этот c‑ID.', syncnow: 'Сохранено', fromclass: 'Баллы по английскому — с clivedu.me',
-      pick: 'Ваше фото', anime: 'Аниме', real: 'Реалистичные', mine: 'Моё фото', upload: 'Выбрать фото', uploadp: 'Обрежется до квадрата и сохранится в малом размере. Фото видите только вы, оно никогда не публикуется.',
+      pick: 'Ваше фото', girls: 'Девушки', boys: 'Парни', mine: 'Моё фото', upload: 'Выбрать фото', uploadp: 'Обрежется до квадрата и сохранится в малом размере. Фото видите только вы, оно никогда не публикуется.',
       save: 'Сохранить', saving: 'Сохраняю…', remove: 'Удалить фото', toobig: 'Это фото не подошло. Попробуйте другое.', saved: 'Сохранено',
-      newname: 'Имя на карте', namesave: 'Сохранить имя', realnote: 'Реалистичные лица созданы ИИ. Ни одно из них не принадлежит реальному человеку.',
+      newname: 'Имя на карте', namesave: 'Сохранить имя', realnote: 'Эти лица созданы ИИ. Ни одно из них не принадлежит реальному человеку.',
       back: 'Обратная сторона', constellation: 'Ваш номер в виде созвездия', belongs: 'Владелец карты', worksonly: 'Она работает, только когда вы вошли через Telegram.',
       daily: 'ежедневных заданий', games: 'игр', best: 'лучшая игра', plants: 'растений', quizzes: 'тестов', copy: 'Скопировать номер', copied: 'Номер c-ID скопирован',
       rk: ['Звёздная пыль', 'Комета', 'Луна', 'Планета', 'Звезда', 'Новая', 'Галактика']
@@ -223,8 +223,8 @@
     }
     function face(u, size) {
       if (u && u.photo && photoURL) return '<img src="' + photoURL + '" alt="" width="' + size + '" height="' + size + '">';
-      var av = (u && u.avatar) || (u ? '' : 'n05');
-      if (/^[gbn]\d\d$/.test(av)) return '<img src="' + (C.root || '') + 'assets/img/avatars/' + av + '.webp" alt="" width="' + size + '" height="' + size + '">';
+      var av = (u && u.avatar) || (u ? '' : 'g08');
+      if (/^[gbn]\d\d$/.test(av)) return '<img src="' + (C.root || '') + 'assets/img/avatars/' + av + '.webp?v=2" alt="" width="' + size + '" height="' + size + '">';
       return '<b>' + esc(String((u && u.name) || '?').charAt(0).toUpperCase()) + '</b>';
     }
     var STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.6 6.9 7.4.4-5.8 4.6 2 7.1L12 16.4l-6.2 4.1 2-7.1L2 8.8l7.4-.4z" fill="currentColor"/></svg>';
@@ -387,15 +387,14 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && modal) closeModal(); });
     function grid(prefix, n) {
       var cur = me.user.photo ? '' : me.user.avatar;
-      var h = '<div class="avgrid">'; for (var i = 1; i <= n; i++) { var id = prefix + ('0' + i).slice(-2); h += '<button data-av="' + id + '" aria-pressed="' + (cur === id) + '" aria-label="' + id + '"><img src="' + (C.root || '') + 'assets/img/avatars/' + id + '.webp" alt="" loading="lazy" width="96" height="96"></button>'; }
+      var h = '<div class="avgrid">'; for (var i = 1; i <= n; i++) { var id = prefix + ('0' + i).slice(-2); h += '<button data-av="' + id + '" aria-pressed="' + (cur === id) + '" aria-label="' + id + '"><img src="' + (C.root || '') + 'assets/img/avatars/' + id + '.webp?v=2" alt="" loading="lazy" width="96" height="96"></button>'; }
       return h + '</div>';
     }
     function picker(tab) {
-      tab = tab || (/^[gb]/.test(me.user.avatar || '') ? 'real' : me.user.photo ? 'mine' : 'anime');
-      var tabs = '<div class="seg cmtabs" role="tablist">' + ['anime', 'real', 'mine'].map(function (k) { return '<button role="tab" data-tab="' + k + '" aria-pressed="' + (tab === k) + '">' + esc(tr(k)) + '</button>'; }).join('') + '</div>';
+      tab = tab || (me.user.photo ? 'mine' : /^b/.test(me.user.avatar || '') ? 'boys' : 'girls');
+      var tabs = '<div class="seg cmtabs" role="tablist">' + ['girls', 'boys', 'mine'].map(function (k) { return '<button role="tab" data-tab="' + k + '" aria-pressed="' + (tab === k) + '">' + esc(tr(k)) + '</button>'; }).join('') + '</div>';
       var body = tabs;
-      if (tab === 'anime') body += grid('n', 24);
-      else if (tab === 'real') body += '<p class="small faint">' + esc(tr('realnote')) + '</p>' + grid('g', 12) + grid('b', 12);
+      if (tab === 'girls' || tab === 'boys') body += grid(tab === 'girls' ? 'g' : 'b', 16) + '<p class="small faint">' + esc(tr('realnote')) + '</p>';
       else body += '<div class="upl"><div class="upv">' + (me.user.photo && photoURL ? '<img src="' + photoURL + '" alt="">' : C.icon('user')) + '</div><div><p class="small muted">' + esc(tr('uploadp')) + '</p>' +
         '<div class="row mt1"><label class="btn primary" style="--c:var(--violet);--ci:#120a2b;cursor:pointer">' + C.icon('upload') + esc(tr('upload')) + '<input type="file" accept="image/*" id="cid-file" hidden></label>' +
         (me.user.photo ? '<button class="btn ghost" data-rmphoto>' + C.icon('trash') + esc(tr('remove')) + '</button>' : '') + '</div><p class="small mt1" id="cid-umsg" role="status"></p></div></div>';
