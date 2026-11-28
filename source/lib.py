@@ -182,6 +182,7 @@ PRODUCTS = [
  {'id':'class','name':'ClivEdu Class','c':'var(--turq)','ci':'#02201e','url':'https://clivedu.me/','page':'products/class.html','icon':'cap','img':'work/class.webp','phone':'phone/class.webp','ext':True},
  {'id':'sprachwerk','name':'Sprachwerk','c':'var(--gold)','ci':'#1a1400','url':'https://sprachwerkclive.netlify.app/','page':'products/sprachwerk.html','icon':'globe','img':'work/sprachwerk.webp','phone':'phone/sprach.webp','ext':True},
  {'id':'vault','name':'Vault Studio','c':'var(--amber)','ci':'#1b0d00','url':'https://wondervaultyoutube.netlify.app/','page':'products/vault-studio.html','icon':'video','img':'work/vault.webp','phone':'phone/vault.webp','ext':True},
+ {'id':'reja','name':'Reja','c':'var(--violet)','ci':'#120a2b','url':'reja/','page':'products/reja.html','icon':'calendar','img':'work/reja.webp','phone':'phone/reja.webp','ext':False},
 ]
 WHOP_STORE = 'https://whop.com/digital-products-a902/'
 WHOP_EBOOK = 'https://whop.com/digital-products-a902/technical-issues-q-a-ebook/'
@@ -223,6 +224,7 @@ def nav(cur, root):
 <button class="iconbtn kbtn" data-open="cmdk" aria-label="{A('a.search','Search the orbit','Orbitadan qidirish','Поиск по орбите')}" data-i18n-attr="aria-label:a.search" title="/">{ic('search')}</button>
 <div class="langsel" role="group" aria-label="Language"><button data-setlang="en" aria-pressed="true">EN</button><button data-setlang="uz" aria-pressed="false">UZ</button><button data-setlang="ru" aria-pressed="false">RU</button></div>
 <button class="iconbtn" data-open="drawer" aria-label="{A('a.settings','Settings','Sozlamalar','Настройки')}" data-i18n-attr="aria-label:a.settings">{ic('sliders')}</button>
+<a class="iconbtn navreja" href="{root}reja/" aria-label="{A('a.reja','Reja, my study planner','Reja, o‘qish rejalashtirgichim','Reja, мой планировщик учёбы')}" data-i18n-attr="aria-label:a.reja" title="Reja">{ic('calendar')}</a>
 <a class="btn primary sm navfocus" href="{root}vaqt/index.html">{ic('leaf')}{T('nav.focus','Focus','Fokus','Фокус')}</a>
 <button class="iconbtn burger" data-open="sheet" aria-label="{A('a.menu','Menu','Menyu','Меню')}" data-i18n-attr="aria-label:a.menu">{ic('menu')}</button>
 </div></div></header>'''
@@ -235,6 +237,7 @@ def sheet(root):
 <nav>{links}</nav>
 <div class="foot">
 <a class="btn primary block navfocus" href="{root}vaqt/index.html">{ic('leaf')}{T('sheet.focus','Open Vaqt, the focus garden','Vaqt fokus bog‘ini ochish','Открыть Vaqt — сад фокуса')}</a>
+<a class="btn ghost block" href="{root}reja/" style="--c:var(--violet)">{ic('calendar')}{T('sheet.reja','Open Reja, the study planner','Reja o‘qish rejalashtirgichini ochish','Открыть Reja — планировщик учёбы')}</a>
 <div class="row"><div class="langsel" role="group" aria-label="Language"><button data-setlang="en">EN</button><button data-setlang="uz">UZ</button><button data-setlang="ru">RU</button></div>
 <button class="btn ghost sm" data-open="drawer">{ic('sliders')}{T('a.settings','Settings','Sozlamalar','Настройки')}</button>
 <button class="btn ghost sm" data-open="cmdk" data-close="sheet">{ic('search')}{T('a.search2','Search','Qidirish','Поиск')}</button></div>

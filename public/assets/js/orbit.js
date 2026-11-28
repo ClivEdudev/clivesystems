@@ -13,7 +13,8 @@
     { id: 'sprachwerk', ring: 1, a: 5.3, sp: 0.075, size: 12, col: 'gold', href: 'products/sprachwerk.html' },
     { id: 'class', ring: 2, a: 1.0, sp: 0.05, size: 13, col: 'turq', href: 'products/class.html' },
     { id: 'vault', ring: 2, a: 3.3, sp: 0.05, size: 11, col: 'amber', href: 'products/vault-studio.html' },
-    { id: 'work', ring: 2, a: 5.2, sp: 0.05, size: 10, col: 'violet', href: 'work.html' }
+    { id: 'reja', ring: 1, a: 3.75, sp: 0.075, size: 12, col: 'violet', href: 'products/reja.html' },
+    { id: 'work', ring: 2, a: 5.4, sp: 0.05, size: 10, col: 'sub', href: 'work.html' }
   ];
   var RINGS = [0.38, 0.62, 0.9], TILT = -0.2;
   var COL = {}, dark = true, stars = [];

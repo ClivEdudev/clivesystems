@@ -34,9 +34,9 @@ CSS = '''
 .bento{grid-template-columns:repeat(6,minmax(0,1fr))}
 .bento .card{display:flex;flex-direction:column;min-height:300px}
 .b-vaqt{grid-column:span 4;grid-row:span 2}
-.b-clivedu,.b-class,.b-sprach,.b-vault,.b-shop{grid-column:span 2}
+.b-clivedu,.b-class,.b-sprach,.b-vault,.b-reja,.b-shop{grid-column:span 2}
 .b-wide{grid-column:span 3}
-@media(max-width:980px){.bento{grid-template-columns:repeat(2,minmax(0,1fr))}.b-vaqt{grid-column:1/-1;grid-row:auto}.b-clivedu,.b-class,.b-sprach,.b-vault,.b-shop,.b-wide{grid-column:span 1}}
+@media(max-width:980px){.bento{grid-template-columns:repeat(2,minmax(0,1fr))}.b-vaqt{grid-column:1/-1;grid-row:auto}.b-clivedu,.b-class,.b-sprach,.b-vault,.b-reja,.b-shop,.b-wide{grid-column:span 1}}
 @media(max-width:640px){.bento{grid-template-columns:1fr}.bento .card{min-height:0}}
 .bento .shot{margin:18px -28px -28px;border-top:1px solid var(--line);overflow:hidden;flex:1;min-height:150px;position:relative}
 .bento .shot img{width:100%;height:100%;object-fit:cover;object-position:top left;position:absolute;inset:0;transition:transform .8s cubic-bezier(.2,.8,.2,1)}
@@ -84,7 +84,7 @@ def body():
     J('h.role.2','I make digital products and sell them on Whop.','Men raqamli mahsulotlar yarataman va ularni Whop’da sotaman.','Я создаю цифровые продукты и продаю их на Whop.')
     J('h.role.3','I’m learning German with an app I built for myself.','Men o‘zim uchun yaratgan ilova orqali nemis tilini o‘rganyapman.','Я учу немецкий с приложением, которое сделал для себя.')
     J('h.role.4','I grow focus gardens. One session, one tulip.','Men fokus bog‘larini o‘stiraman. Bitta sessiya — bitta lola.','Я выращиваю сады фокуса. Одна сессия — один тюльпан.')
-    for i,(k,en,uz,ru) in enumerate([('vaqt','Vaqt','Vaqt','Vaqt'),('clivedu','ClivEdu','ClivEdu','ClivEdu'),('class','Class','Class','Class'),('sprachwerk','Sprachwerk','Sprachwerk','Sprachwerk'),('vault','Vault Studio','Vault Studio','Vault Studio'),('shop','Shop','Do‘kon','Магазин'),('work','Work','Ishlar','Работы')]):
+    for i,(k,en,uz,ru) in enumerate([('vaqt','Vaqt','Vaqt','Vaqt'),('clivedu','ClivEdu','ClivEdu','ClivEdu'),('class','Class','Class','Class'),('sprachwerk','Sprachwerk','Sprachwerk','Sprachwerk'),('vault','Vault Studio','Vault Studio','Vault Studio'),('reja','Reja','Reja','Reja'),('shop','Shop','Do‘kon','Магазин'),('work','Work','Ishlar','Работы')]):
         J('orb.'+k,en,uz,ru)
 
     hero = f'''<section class="hero" aria-label="Intro">
@@ -143,13 +143,14 @@ def body():
 <div class="row mt1"><span class="chip">{ic('timer')}Pomodoro · Flow · Timer</span><span class="chip">{ic('headphones')}{T('h.vq.c2','6 ambient sounds','6 ta fon ovozi','6 фоновых звуков')}</span><span class="chip">{ic('wifi')}{T('h.vq.c3','Works offline','Oflayn ishlaydi','Работает офлайн')}</span></div>
 </a>'''
     bento = f'''<section class="band"><div class="wrap">
-{sh('h.orb.l','The orbit','Orbita','Орбита','h.orb.h','Five products, one maker','Beshta mahsulot, bitta yaratuvchi','Пять продуктов, один автор',('h.orb.p','Each one started as something I needed: for my students, for my German, for my YouTube channel, for my own focus.','Ularning har biri menga kerak bo‘lgan narsadan boshlangan: o‘quvchilarim, nemis tilim, YouTube kanalim va o‘z fokusim uchun.','Каждый начался с того, что было нужно мне: моим ученикам, моему немецкому, моему YouTube-каналу, моему фокусу.'))}
+{sh('h.orb.l','The orbit','Orbita','Орбита','h.orb.h','Six products, one maker','Oltita mahsulot, bitta yaratuvchi','Шесть продуктов, один автор',('h.orb.p','Each one started as something I needed: for my students, for my German, for my YouTube channel, for my own focus and my own university week.','Ularning har biri menga kerak bo‘lgan narsadan boshlangan: o‘quvchilarim, nemis tilim, YouTube kanalim, o‘z fokusim va universitet haftam uchun.','Каждый начался с того, что было нужно мне: моим ученикам, моему немецкому, моему YouTube-каналу, моему фокусу и моей учебной неделе.'))}
 <div class="grid bento">
 {vaqt_card}
 {pcard('b-clivedu','clivedu','','','','','h.cd.p','An English classroom among the stars: lessons, a Word Galaxy that grows with every word, games and a teacher desk.','Yulduzlar orasidagi ingliz tili sinfi: darslar, har bir so‘z bilan o‘sadigan So‘z galaktikasi, o‘yinlar va o‘qituvchi stoli.','Класс английского среди звёзд: уроки, Галактика слов, которая растёт с каждым словом, игры и стол учителя.',delay=80)}
 {pcard('b-class','class','','','','','h.cl.p','The live classroom at clivedu.me. My students open each lesson on their phones while it plays on the board.','clivedu.me’dagi jonli sinf. O‘quvchilarim har bir darsni doskada ko‘rsatilayotganda telefonlarida ochadi.','Живой класс на clivedu.me. Ученики открывают урок на телефонах, пока он идёт на доске.',delay=160)}
-{pcard('b-sprach b-wide','sprachwerk','','','','','h.sw.p','German, engineered: a metro line to A1, voiced Berlin missions, a shadowing studio and a radar that guesses der, die or das.','Nemis tili, muhandislik bilan: A1 gacha metro chizig‘i, ovozli Berlin topshiriqlari, takrorlash studiyasi va der, die yoki das ni taxmin qiluvchi radar.','Немецкий, собранный как механизм: линия метро до A1, озвученные берлинские миссии, студия повторения и радар, угадывающий der, die или das.',delay=0)}
-{pcard('b-vault b-wide','vault','','','','','h.vs.p','My browser video studio for the WonderVault channel: scripts, a timeline with captions, exports and thumbnails.','WonderVault kanali uchun brauzerdagi video studiyam: ssenariylar, subtitrli taymlayn, eksport va muqovalar.','Моя видеостудия в браузере для канала WonderVault: сценарии, монтаж с субтитрами, экспорт и обложки.',status=('live',T('h.st.tool','My tool','Mening vositam','Мой инструмент')),delay=80)}
+{pcard('b-sprach','sprachwerk','','','','','h.sw.p','German, engineered: a metro line to A1, voiced Berlin missions, a shadowing studio and a radar that guesses der, die or das.','Nemis tili, muhandislik bilan: A1 gacha metro chizig‘i, ovozli Berlin topshiriqlari, takrorlash studiyasi va der, die yoki das ni taxmin qiluvchi radar.','Немецкий, собранный как механизм: линия метро до A1, озвученные берлинские миссии, студия повторения и радар, угадывающий der, die или das.',delay=0)}
+{pcard('b-vault','vault','','','','','h.vs.p','My browser video studio for the WonderVault channel: scripts, a timeline with captions, exports and thumbnails.','WonderVault kanali uchun brauzerdagi video studiyam: ssenariylar, subtitrli taymlayn, eksport va muqovalar.','Моя видеостудия в браузере для канала WonderVault: сценарии, монтаж с субтитрами, экспорт и обложки.',status=('live',T('h.st.tool','My tool','Mening vositam','Мой инструмент')),delay=80)}
+{pcard('b-reja','reja','','','','','h.rj.p','My study and life planner: classes in their pairs, A and B weeks, deadlines with files, and a timetable you rearrange by holding and dragging.','O‘qish va hayot rejalashtirgichim: juftliklardagi darslar, A va B haftalar, fayl biriktirilgan muddatlar va bosib turib suriladigan jadval.','Мой планировщик учёбы и жизни: пары на своих местах, недели A и B, дедлайны с файлами и расписание, которое меняется зажатием и перетаскиванием.',status=('live',T('h.st.new','New today','Bugun yangi','Новинка')),delay=160)}
 </div></div></section>'''
 
     hats = f'''<section class="band"><div class="wrap">
