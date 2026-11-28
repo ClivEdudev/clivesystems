@@ -1,6 +1,6 @@
 /* Reja service worker: works offline and shows reminders as system notifications */
-var CACHE = 'reja-2026-11-28-v2';
-var SHELL = ['./', 'index.html', 'reja.css?v=2', 'reja.js?v=2', 'icon.svg', 'icon-192.png', 'manifest.webmanifest'];
+var CACHE = 'reja-2026-11-28-v3';
+var SHELL = ['./', 'index.html', 'reja.css?v=3', 'reja.js?v=3', 'icon.svg', 'icon-192.png', 'manifest.webmanifest'];
 self.addEventListener('install', function (e) { e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(SHELL); }).then(function () { return self.skipWaiting(); })); });
 self.addEventListener('activate', function (e) { e.waitUntil(caches.keys().then(function (ks) { return Promise.all(ks.filter(function (k) { return k.indexOf('reja-') === 0 && k !== CACHE; }).map(function (k) { return caches.delete(k); })); }).then(function () { return self.clients.claim(); })); });
 self.addEventListener('fetch', function (e) {

@@ -79,7 +79,7 @@
         sl(5, 1, 'mat', 'lecture'), sl(5, 2, 'akad', 'seminar'), sl(5, 3, 'akt', 'lab'),
         sl(6, 1, 'eng', 'seminar'), sl(6, 2, 'akt', 'seminar')
       ],
-      offDays: [3], tasks: [], notes: [], events: [], goals: [], cancelled: {}, fired: {},
+      offDays: [3], tasks: [], notes: [], events: [], goals: [], oneoffs: [], cancelled: {}, fired: {},
       settings: { notify: false, classRemind: 10, defRemind: [1440, 180], semesterEnd: '2027-01-31', theme: 'dark', taskView: 'list' }
     };
   }
@@ -88,7 +88,7 @@
     var d = null; try { d = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
     if (!d || !d.subjects) return seed();
     var f = seed();
-    ['tasks', 'notes', 'events', 'goals', 'offDays', 'slots', 'periods'].forEach(function (k) { if (!Array.isArray(d[k])) d[k] = f[k]; });
+    ['tasks', 'notes', 'events', 'goals', 'oneoffs', 'offDays', 'slots', 'periods'].forEach(function (k) { if (!Array.isArray(d[k])) d[k] = f[k]; });
     if (d.periods[2] && d.periods[2][0] === '11:30' && d.periods[2][1] === '12:50') d.periods[2] = ['12:00', '13:20'];
     d.settings = Object.assign(f.settings, d.settings || {}); d.cancelled = d.cancelled || {}; d.fired = d.fired || {};
     return d;
@@ -122,7 +122,11 @@
     return S.slots.filter(function (s) { return s.dow === dow && (s.parity === 'all' || s.parity === p) && !S.cancelled[key + ':' + s.id]; }).map(function (s) {
       var per = S.periods[s.period - 1] || ['08:30', '09:50'];
       return { kind: 'class', slot: s, subject: s.subject, type: s.type, start: at(d, per[0]).getTime(), end: at(d, per[1]).getTime(), key: key + ':' + s.id, period: s.period };
-    }).sort(function (a, b) { return a.start - b.start; });
+    }).concat(S.oneoffs.filter(function (o) { return o.date === key; }).map(function (o) {
+      /* a class moved to this day for one time only */
+      var per = S.periods[o.period - 1] || ['08:30', '09:50'];
+      return { kind: 'class', oneoff: o, slot: { id: 'o' + o.id, parity: 'all', dow: dow, period: o.period }, subject: o.subject, type: o.type, start: at(d, per[0]).getTime(), end: at(d, per[1]).getTime(), key: key + ':o' + o.id, period: o.period };
+    })).sort(function (a, b) { return a.start - b.start; });
   }
   function eventsOn(d) {
     var k = ymd(d), dow = d.getDay();
@@ -301,6 +305,7 @@
         openEvent(null, { date: col.getAttribute('data-date'), start: m2hm(Math.max(0, Math.min(1380, min))) });
       });
     });
+    $$('.week .blk[data-class], .week .blk[data-event]', m).forEach(function (b) { holdDrag(b, calDrag(b)); });
     $$('.week .hd', m).forEach(function (h) { h.onclick = function () { cal.at = pday(h.getAttribute('data-date')); cal.mode = 'day'; render(); }; });
     $$('.mc', m).forEach(function (c) { c.onclick = function () { cal.at = pday(c.getAttribute('data-date')); cal.mode = innerWidth < 720 ? 'day' : 'week'; render(); }; });
     var nl = $('.nowline', m); if (nl && !scrolledCal) { scrolledCal = true; var y = nl.getBoundingClientRect().top + window.scrollY - 220; if (y > 200) window.scrollTo(0, y); }
@@ -327,7 +332,7 @@
       if (tday) { var ny = (now - at(d, pad(H0) + ':00')) / 3600000 * PH; if (ny > 0 && ny < H) h += '<div class="nowline" style="top:' + ny.toFixed(1) + 'px"></div>'; }
       h += '</div>';
     });
-    return h + '</div></div><p class="tiny muted" style="margin-top:10px">Tap an empty slot to add an event. Solid = lecture, stripes = seminar, dots = laboratory, red flags = deadlines.</p>';
+    return h + '</div></div><p class="tiny muted" style="margin-top:10px">Press and hold a class or event, then drag it to move it. Tap an empty slot to add an event. Solid = lecture, stripes = seminar, dots = laboratory, red flags = deadlines.</p>';
   }
   function lanes(items) {
     var out = items.map(function (x) { return Object.assign({}, x, { lane: 0, lanes: 1 }); }), groups = [], g = null;
@@ -356,6 +361,137 @@
     return h + '</div>';
   }
 
+  /* ------------------------------------------------------------ press, hold and drag */
+  var lastDrag = 0;
+  document.addEventListener('click', function (e) { if (Date.now() - lastDrag < 450) { e.stopPropagation(); e.preventDefault(); } }, true);
+  /* mouse: drag right away. touch and pen: hold still for a moment first, so a normal swipe still scrolls */
+  function holdDrag(el, o) {
+    var timer = null, sx = 0, sy = 0, ox = 0, oy = 0, active = false, ghost = null, pid = null, last = null, raf = null;
+    el.addEventListener('contextmenu', function (e) { if (active || timer) e.preventDefault(); });
+    el.addEventListener('pointerdown', function (e) {
+      if (e.button) return;
+      sx = e.clientX; sy = e.clientY; pid = e.pointerId; last = e;
+      var r = el.getBoundingClientRect(); ox = e.clientX - r.left; oy = e.clientY - r.top;
+      clearTimeout(timer); timer = setTimeout(function () { timer = null; start(); }, e.pointerType === 'mouse' ? 900 : 420);
+      if (e.pointerType !== 'mouse') el.classList.add('holding');
+    });
+    el.addEventListener('pointermove', function (e) {
+      last = e;
+      if (active) { e.preventDefault(); step(); return; }
+      if (!timer) return;
+      var d = Math.hypot(e.clientX - sx, e.clientY - sy);
+      if (e.pointerType === 'mouse' && d > 5) { clearTimeout(timer); timer = null; start(); }
+      else if (e.pointerType !== 'mouse' && d > 10) { clearTimeout(timer); timer = null; el.classList.remove('holding'); }
+    });
+    el.addEventListener('touchmove', function (e) { if (active) e.preventDefault(); }, { passive: false });
+    function start() {
+      active = true; el.classList.remove('holding');
+      try { el.setPointerCapture(pid); } catch (e) {}
+      try { if (navigator.vibrate) navigator.vibrate(12); } catch (e) {}
+      var r = el.getBoundingClientRect();
+      ghost = el.cloneNode(true); ghost.classList.add('ghost'); ghost.removeAttribute('data-class'); ghost.removeAttribute('data-event'); ghost.removeAttribute('data-slot');
+      ghost.style.cssText += ';position:fixed;margin:0;left:' + r.left + 'px;top:' + r.top + 'px;width:' + r.width + 'px;height:' + r.height + 'px;right:auto';
+      document.body.appendChild(ghost); el.classList.add('lifted'); document.body.classList.add('dragging');
+      if (o.start) o.start(); step();
+    }
+    function step() {
+      if (!ghost || !last) return;
+      ghost.style.left = (last.clientX - ox) + 'px'; ghost.style.top = (last.clientY - oy) + 'px';
+      o.move(last.clientX, last.clientY, last.clientY - oy);
+      cancelAnimationFrame(raf);
+      var edge = last.clientY < 90 ? -1 : last.clientY > innerHeight - 90 ? 1 : 0;
+      if (edge) raf = requestAnimationFrame(function () { window.scrollBy(0, edge * 14); if (active) step(); });
+    }
+    function finish(drop) {
+      clearTimeout(timer); timer = null; el.classList.remove('holding'); cancelAnimationFrame(raf);
+      if (!active) return;
+      active = false; lastDrag = Date.now();
+      if (ghost) ghost.remove(); ghost = null; el.classList.remove('lifted'); document.body.classList.remove('dragging');
+      if (drop && last) o.drop(last.clientX, last.clientY, last.clientY - oy); else if (o.cancel) o.cancel();
+    }
+    el.addEventListener('pointerup', function (e) { last = e; finish(true); });
+    el.addEventListener('pointercancel', function () { finish(false); });
+  }
+  function nearestPeriod(min) {
+    var best = 1, bd = 1e9; S.periods.forEach(function (p, i) { var d = Math.abs(hm2m(p[0]) - min); if (d < bd) { bd = d; best = i + 1; } }); return best;
+  }
+  /* calendar: drop a class on a pair, or an event on a 15-minute step */
+  function calDrag(el) {
+    var isClass = el.hasAttribute('data-class'), key = el.getAttribute(isClass ? 'data-class' : 'data-event'), it = null, zone = null, target = null;
+    function clear() { if (zone) zone.remove(); zone = null; $$('.week .day.over').forEach(function (d) { d.classList.remove('over'); }); }
+    return {
+      start: function () { it = isClass ? findItem(key) : itemsOn(pday(key.split(':')[0])).filter(function (x) { return x.key === key; })[0]; },
+      move: function (x, y, topY) {
+        clear(); target = null; if (!it) return;
+        var under = document.elementFromPoint(x, y), col = under && under.closest('.week .day'); if (!col) return;
+        var r = col.getBoundingClientRect(), min = (topY - r.top) / PH * 60 + H0 * 60, date = col.getAttribute('data-date'), top, ht, label;
+        if (isClass) { var pn = nearestPeriod(min), per = S.periods[pn - 1]; target = { date: date, period: pn }; top = (hm2m(per[0]) - H0 * 60) / 60 * PH; ht = (hm2m(per[1]) - hm2m(per[0])) / 60 * PH - 3; label = 'Pair ' + pn + ' · ' + per[0]; }
+        else { var len = (it.end - it.start) / 60000, st0 = Math.max(0, Math.min(1439 - len, Math.round(min / 15) * 15)); target = { date: date, start: m2hm(st0), end: m2hm(st0 + len) }; top = (st0 - H0 * 60) / 60 * PH; ht = len / 60 * PH - 3; label = m2hm(st0) + '–' + m2hm(st0 + len); }
+        col.classList.add('over');
+        zone = document.createElement('div'); zone.className = 'dropzone'; zone.style.cssText = 'top:' + top.toFixed(1) + 'px;height:' + Math.max(24, ht).toFixed(1) + 'px;--c:' + (it.subject ? scol(it.subject) : (it.ev && it.ev.color) || '#FFB547');
+        zone.innerHTML = '<span>' + esc(fdate(pday(date))) + ' · ' + esc(label) + '</span>'; col.appendChild(zone);
+      },
+      drop: function () { clear(); if (it && target) (isClass ? moveClass : moveEvent)(it, target); },
+      cancel: clear
+    };
+  }
+  function moveClass(c, t) {
+    var from = ymd(new Date(c.start)), per = S.periods[t.period - 1];
+    if (from === t.date && c.period === t.period) return;
+    var snap = JSON.stringify({ slots: S.slots, oneoffs: S.oneoffs, cancelled: S.cancelled });
+    function undo() { var o = JSON.parse(snap); S.slots = o.slots; S.oneoffs = o.oneoffs; S.cancelled = o.cancelled; save(); render(); }
+    if (c.oneoff) { c.oneoff.date = t.date; c.oneoff.period = t.period; save(); render(); toast(sname(c.subject) + ' moved to ' + fdate(pday(t.date)) + ' ' + per[0], 'cal', scol(c.subject), undo); return; }
+    var nd = pday(t.date), wk = c.slot.parity !== 'all' && parity(nd) !== c.slot.parity;
+    var body = '<div class="card hl" style="--c:' + scol(c.subject) + '"><b>' + esc(sname(c.subject, true)) + '</b><div class="small muted">' + TYPES[c.type] + '</div>' +
+      '<div class="mv"><div><small>From</small><b>' + fdate(c.start) + '</b><span>Pair ' + c.period + ' · ' + ftime(c.start) + '</span></div>' + ic('right') + '<div><small>To</small><b>' + fdate(nd) + '</b><span>Pair ' + t.period + ' · ' + per[0] + '</span></div></div></div>' +
+      '<button class="choice" id="mv-once">' + ic('flag') + '<span><b>Only this time</b><small>Just ' + fdate(c.start) + ' moves. Every other week stays the same.</small></span></button>' +
+      '<button class="choice" id="mv-all">' + ic('cal') + '<span><b>Every week from now on</b><small>The timetable changes: ' + DOW[nd.getDay()] + 's, pair ' + t.period + (c.slot.parity !== 'all' ? ', still every other week' : '') + '.</small></span></button>' +
+      (wk ? '<p class="tiny muted" style="margin:0">Note: ' + fdate(nd) + ' is in week ' + parity(nd) + ', but this class runs in week ' + c.slot.parity + ' weeks.</p>' : '');
+    sheet('Move this class?', body, '<button class="btn" data-close2>Cancel</button>', function (sh) {
+      $('[data-close2]', sh).onclick = closeSheet;
+      $('#mv-once').onclick = function () { S.cancelled[c.key] = true; S.oneoffs.push({ id: uid(), date: t.date, period: t.period, subject: c.subject, type: c.type, from: c.key }); save(); closeSheet(); toast('Moved for ' + fdate(nd) + ' only', 'flag', scol(c.subject), undo); };
+      $('#mv-all').onclick = function () { var sl = S.slots.filter(function (x) { return x.id === c.slot.id; })[0]; sl.dow = nd.getDay(); sl.period = t.period; save(); closeSheet(); toast('Timetable updated: ' + DOWS[sl.dow] + ', pair ' + sl.period, 'cal', scol(c.subject), undo); };
+    });
+  }
+  function moveEvent(it, t) {
+    var e = it.ev, snap = JSON.stringify(e), from = ymd(new Date(it.start)), shift = Math.round((pday(t.date) - pday(from)) / 864e5);
+    if (!shift && t.start === e.start) return;
+    e.date = ymd(addDays(pday(e.date), shift)); e.start = t.start; e.end = t.end;
+    Object.keys(S.fired).forEach(function (k) { if (k.indexOf(e.id) >= 0) delete S.fired[k]; });
+    save(); render();
+    toast(e.title + (e.repeat !== 'none' ? ' (every ' + (e.repeat === 'daily' ? 'day' : 'week') + ')' : '') + ' moved to ' + fdate(pday(t.date)) + ' ' + t.start, 'cal', e.color, function () { var o = JSON.parse(snap); S.events = S.events.map(function (x) { return x.id === o.id ? o : x; }); save(); render(); });
+  }
+  /* settings: the weekly timetable as a grid of days and pairs */
+  var TTD = [1, 2, 3, 4, 5, 6, 0];
+  function ttGrid() {
+    var h = '<div class="ttwrap"><div class="tt"><div class="tth"></div>' + TTD.map(function (d) { return '<div class="tth' + (S.offDays.indexOf(d) >= 0 ? ' off' : '') + '">' + DOWS[d] + '</div>'; }).join('');
+    S.periods.forEach(function (p, i) {
+      h += '<div class="ttp"><b>' + (i + 1) + '</b><small>' + p[0] + '<br>' + p[1] + '</small></div>';
+      TTD.forEach(function (d) {
+        var sl = S.slots.filter(function (x) { return x.dow === d && x.period === i + 1; });
+        h += '<div class="ttc' + (S.offDays.indexOf(d) >= 0 ? ' off' : '') + '" data-cell="' + d + ':' + (i + 1) + '">' + sl.map(function (x) {
+          return '<div class="slot" data-slot="' + x.id + '" style="--c:' + scol(x.subject) + '"><b>' + esc(sname(x.subject)) + '</b><small>' + TYPES[x.type] + (x.parity !== 'all' ? ' · wk ' + x.parity : '') + '</small></div>';
+        }).join('') + '<span class="add">' + ic('plus') + '</span></div>';
+      });
+    });
+    return h + '</div></div>';
+  }
+  function ttDrag(el) {
+    var id = el.getAttribute('data-slot'), cell = null;
+    function clear() { $$('.ttc.over').forEach(function (c) { c.classList.remove('over'); }); }
+    return {
+      move: function (x, y) { clear(); var u = document.elementFromPoint(x, y); cell = u && u.closest('[data-cell]'); if (cell) cell.classList.add('over'); },
+      drop: function () {
+        clear(); if (!cell) return;
+        var p = cell.getAttribute('data-cell').split(':'), sl = S.slots.filter(function (x) { return x.id === id; })[0], old = [sl.dow, sl.period];
+        if (sl.dow === +p[0] && sl.period === +p[1]) return;
+        sl.dow = +p[0]; sl.period = +p[1]; save(); render();
+        toast(sname(sl.subject) + ' → ' + DOWS[sl.dow] + ', pair ' + sl.period, 'cal', scol(sl.subject), function () { sl.dow = old[0]; sl.period = old[1]; save(); render(); });
+      },
+      cancel: clear
+    };
+  }
+
   /* ------------------------------------------------------------ class detail */
   function findItem(key) {
     var p = key.split(':'), d = pday(p[0]);
@@ -365,7 +501,8 @@
     var c = findItem(key); if (!c) return;
     var s = subj(c.subject), col = s.color, ns = notesFor(key).sort(function (a, b) { return b.at - a.at; });
     var open = S.tasks.filter(function (t) { return t.subject === c.subject && t.status !== 'done'; }).sort(function (a, b) { return (pdt(a.due) || 9e15) - (pdt(b.due) || 9e15); });
-    var body = '<div class="row wrap"><span class="chip" style="--c:' + col + '">' + TYPES[c.type] + '</span><span class="chip" style="--c:#9AA2C7">' + ic('clock') + fdate(c.start) + ' · ' + ftime(c.start) + '–' + ftime(c.end) + '</span><span class="chip" style="--c:#9AA2C7">Pair ' + c.period + '</span>' + (c.slot.parity !== 'all' ? '<span class="chip parity">Every other week (' + c.slot.parity + ')</span>' : '') + '</div>' +
+    var body = '<div class="row wrap"><span class="chip" style="--c:' + col + '">' + TYPES[c.type] + '</span><span class="chip" style="--c:#9AA2C7">' + ic('clock') + fdate(c.start) + ' · ' + ftime(c.start) + '–' + ftime(c.end) + '</span><span class="chip" style="--c:#9AA2C7">Pair ' + c.period + '</span>' + (c.slot.parity !== 'all' ? '<span class="chip parity">Every other week (' + c.slot.parity + ')</span>' : '') + (c.oneoff ? '<span class="chip" style="--c:#FFB547">Moved here this time</span>' : '') + '</div>' +
+      '<p class="tiny muted" style="margin:0">Tip: in the calendar, press and hold a class, then drag it to a new day or pair.</p>' +
       '<div class="card" style="--c:' + col + '">' + qnoteHtml(c) + '</div>' +
       '<div><h3 style="margin-bottom:8px">Notes from this class</h3><div class="notes">' + (ns.length ? ns.map(noteHtml).join('') : '<div class="empty">No notes yet.</div>') + '</div></div>' +
       '<div><h3 style="margin-bottom:8px">Open assignments · ' + esc(s.short) + '</h3><div class="grid" style="gap:8px">' + (open.length ? open.map(taskHtml).join('') : '<div class="empty">None. Nice.</div>') + '</div></div>';
@@ -374,7 +511,9 @@
       bindQuick(sh, c); bindNotes(sh);
       $('#cl-task').onclick = function () { closeSheet(); openTask(null, { subject: c.subject, due: defaultDue(c.subject) }); };
       $('#cl-subj').onclick = function () { closeSheet(); openSubject(c.subject); };
-      $('#cl-cancel').onclick = function () { S.cancelled[key] = true; save(); closeSheet(); toast('Class hidden for ' + fdate(c.start), 'x', col, function () { delete S.cancelled[key]; save(); render(); }); };
+      $('#cl-cancel').onclick = function () {
+        if (c.oneoff) { var i = S.oneoffs.indexOf(c.oneoff); S.oneoffs.splice(i, 1); if (c.oneoff.from) delete S.cancelled[c.oneoff.from]; save(); closeSheet(); toast('Moved class removed', 'x', col, function () { S.oneoffs.splice(i, 0, c.oneoff); if (c.oneoff.from) S.cancelled[c.oneoff.from] = true; save(); render(); }); return; }
+        S.cancelled[key] = true; save(); closeSheet(); toast('Class hidden for ' + fdate(c.start), 'x', col, function () { delete S.cancelled[key]; save(); render(); }); };
     });
   }
 
@@ -638,10 +777,7 @@
       '<div class="card" style="background:color-mix(in srgb,var(--acc2) 8%,transparent)"><b>Reminders on your phone, even when Reja is closed</b><p class="small muted" style="margin:6px 0 12px">Export your classes and deadlines to your phone’s calendar (Google Calendar, Apple Calendar, Outlook). Its alarms ring even when the browser is closed. Export again after adding new deadlines.</p><div class="row wrap"><button class="btn pri sm" id="set-ics">' + ic('cal') + 'Export to calendar (.ics)</button><span class="tiny muted">Classes repeat until</span><input class="in" type="date" id="set-end" value="' + s.semesterEnd + '" style="width:160px;min-height:34px;padding:4px 10px"></div></div></section>';
     h += '<section class="card grid" style="gap:12px"><h2>' + ic('clock') + ' Class times</h2><p class="small muted" style="margin:0">Set the start and end of each pair. Every class moves with it.</p>' + S.periods.map(function (p, i) { return '<div class="per"><b>' + (i + 1) + '</b><input class="in" type="time" data-per="' + i + ':0" value="' + p[0] + '"><input class="in" type="time" data-per="' + i + ':1" value="' + p[1] + '"></div>'; }).join('') + '</section>';
     h += '<section class="card grid" style="gap:12px;grid-column:1/-1"><div class="row sp wrap"><h2>' + ic('cal') + ' Weekly timetable</h2><div class="row wrap"><span class="chip parity">This week is week ' + parity(new Date()) + '</span><button class="btn sm" id="set-swap">Swap A and B</button><button class="btn sm pri" id="set-addslot">' + ic('plus') + 'Add class</button></div></div>' +
-      '<p class="small muted" style="margin:0">Week A has the Thursday ICT lecture. Tap a class to change or remove it.</p><div class="tt-grid">' + [1, 2, 3, 4, 5, 6, 0].map(function (dow) {
-        var sl = S.slots.filter(function (x) { return x.dow === dow; }).sort(function (a, b) { return a.period - b.period; }), off = S.offDays.indexOf(dow) >= 0;
-        return '<div class="ttrow"><b>' + DOW[dow].slice(0, 3) + '</b><div class="ttcells">' + (sl.length ? sl.map(function (x) { var p = S.periods[x.period - 1] || ['?', '?']; return '<span class="slot" data-slot="' + x.id + '" style="--c:' + scol(x.subject) + '"><span class="dot"></span>' + p[0] + ' ' + esc(sname(x.subject)) + ' <small>' + TYPES[x.type] + (x.parity !== 'all' ? ' · week ' + x.parity + ' only' : '') + '</small></span>'; }).join('') : '<span class="small muted">' + (off ? 'Self-improvement day' : 'Free') + '</span>') + '</div></div>';
-      }).join('') + '</div></section>';
+      '<p class="small muted" style="margin:0">Press and hold a class, then drag it to another day or pair. Tap a class to edit it, or an empty cell to add one. Week A has the Thursday ICT lecture.</p>' + ttGrid() + '</section>';
     h += '<section class="card grid" style="gap:12px"><h2>' + ic('down') + ' Backup</h2><p class="small muted" style="margin:0">Everything stays in this browser. Download a backup now and then, especially before clearing browser data. Files are not inside the backup; keep the originals too.</p><div class="row wrap"><button class="btn sm" id="set-export">' + ic('down') + 'Download backup</button><button class="btn sm" id="set-import">' + ic('up') + 'Restore backup</button></div><div class="small muted" id="set-usage"></div></section>';
     h += '<section class="card grid" style="gap:12px"><h2>' + ic('spark') + ' Appearance</h2><div class="row sp"><b>Theme</b><div class="seg"><button type="button" data-th="dark" aria-pressed="' + (s.theme === 'dark') + '">Dark</button><button type="button" data-th="light" aria-pressed="' + (s.theme === 'light') + '">Light</button></div></div><div class="row sp"><div><b>Start over</b><div class="small muted">Erase plans, notes and files in this browser.</div></div><button class="btn sm bad" id="set-reset">Erase</button></div></section>';
     m.innerHTML = h + '</div></div>';
@@ -653,7 +789,8 @@
     $$('[data-per]', m).forEach(function (inp) { inp.onchange = function () { var p = inp.getAttribute('data-per').split(':'); S.periods[+p[0]][+p[1]] = inp.value; save(); toast('Class times updated', 'clock'); }; });
     $('#set-swap').onclick = function () { var a = monday(pday(S.parityAnchor)); S.parityAnchor = ymd(addDays(a, 7)); save(); render(); toast('Swapped. This week is now week ' + parity(new Date()), 'cal'); };
     $('#set-addslot').onclick = function () { openSlot(null); };
-    $$('[data-slot]', m).forEach(function (b) { b.onclick = function () { openSlot(b.getAttribute('data-slot')); }; });
+    $$('[data-slot]', m).forEach(function (b) { b.onclick = function () { openSlot(b.getAttribute('data-slot')); }; holdDrag(b, ttDrag(b)); });
+    $$('[data-cell]', m).forEach(function (c) { c.onclick = function (e) { if (e.target.closest('[data-slot]')) return; var p = c.getAttribute('data-cell').split(':'); openSlot(null, { dow: +p[0], period: +p[1] }); }; });
     $('#set-export').onclick = function () { download('reja-backup-' + ymd(new Date()) + '.json', JSON.stringify({ app: 'reja', v: 1, at: new Date().toISOString(), data: S }, null, 2), 'application/json'); };
     $('#set-import').onclick = function () {
       var fi = $('#backup-in'); fi.value = ''; fi.onchange = function () {
@@ -668,8 +805,8 @@
     };
     if (navigator.storage && navigator.storage.estimate) navigator.storage.estimate().then(function (q) { var u = $('#set-usage'); if (u) u.textContent = 'Using ' + fsize(q.usage || 0) + ' of about ' + fsize(q.quota || 0) + ' available to this site.'; });
   }
-  function openSlot(id) {
-    var isNew = !id, s = isNew ? { id: uid(), dow: 1, period: 4, subject: S.subjects[0].id, type: 'lecture', parity: 'all' } : JSON.parse(JSON.stringify(S.slots.filter(function (x) { return x.id === id; })[0]));
+  function openSlot(id, pre) {
+    var isNew = !id, s = isNew ? Object.assign({ id: uid(), dow: 1, period: 4, subject: S.subjects[0].id, type: 'lecture', parity: 'all' }, pre || {}) : JSON.parse(JSON.stringify(S.slots.filter(function (x) { return x.id === id; })[0]));
     var body = '<div class="field"><span>Subject</span><select class="in" id="sl-s">' + S.subjects.map(function (x) { return '<option value="' + x.id + '"' + (x.id === s.subject ? ' selected' : '') + '>' + esc(x.name) + '</option>'; }).join('') + '</select></div>' +
       '<div class="two"><label class="field"><span>Day</span><select class="in" id="sl-d">' + [1, 2, 3, 4, 5, 6, 0].map(function (d) { return '<option value="' + d + '"' + (d === s.dow ? ' selected' : '') + '>' + DOW[d] + '</option>'; }).join('') + '</select></label>' +
       '<label class="field"><span>Pair</span><select class="in" id="sl-p">' + S.periods.map(function (p, i) { return '<option value="' + (i + 1) + '"' + (i + 1 === s.period ? ' selected' : '') + '>' + (i + 1) + ' · ' + p[0] + '–' + p[1] + '</option>'; }).join('') + '</select></label></div>' +

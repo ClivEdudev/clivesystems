@@ -528,7 +528,7 @@ LINKS_CSS = '''
 .lk a.l>svg{margin-left:auto;width:18px;height:18px;color:var(--mute);flex:none}
 '''
 def links_body():
-    L = [('var(--green)','leaf','Vaqt','vaqt/index.html','pd.vaqt.tag'),('var(--turq)','cap','ClivEdu Class','https://clivedu.me/','pd.class.tag'),('var(--blue)','star','ClivEdu',P('clivedu')['url'],'pd.clivedu.tag'),('var(--gold)','globe','Sprachwerk',P('sprachwerk')['url'],'pd.sprachwerk.tag'),('var(--rose)','book','Technical Issues Q&amp;A',WHOP_EBOOK,None),('var(--amber)','youtube','WonderVault',YT,None),('var(--turq)','send','Telegram @clive077',TG,None),('var(--blue)','mail','Email','mailto:'+EMAIL,None),('var(--violet)','orbit','clive · orbit','index.html',None)]
+    L = [('var(--green)','leaf','Vaqt','vaqt/index.html','pd.vaqt.tag'),('var(--turq)','cap','ClivEdu Class','https://clivedu.me/','pd.class.tag'),('var(--blue)','star','ClivEdu',P('clivedu')['url'],'pd.clivedu.tag'),('var(--gold)','globe','Sprachwerk',P('sprachwerk')['url'],'pd.sprachwerk.tag'),('var(--violet)','calendar','Reja','reja/','pd.reja.tag'),('var(--rose)','book','Technical Issues Q&amp;A',WHOP_EBOOK,None),('var(--amber)','youtube','WonderVault',YT,None),('var(--turq)','send','Telegram @clive077',TG,None),('var(--blue)','mail','Email','mailto:'+EMAIL,None),('var(--violet)','orbit','clive · orbit','index.html',None)]
     out = ''
     for i,(c,icn,n,u,sub) in enumerate(L):
         ext = u.startswith('http')

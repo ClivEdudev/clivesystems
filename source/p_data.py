@@ -38,6 +38,15 @@ PD = {
   'price': ('Free', 'Bepul', 'Бесплатно'),
   'sign': ('Optional Google sign-in', 'Ixtiyoriy Google orqali kirish', 'Вход через Google по желанию'),
  },
+ 'reja': {
+  'tag': ('Study & life planner', 'O‘qish va hayot rejalashtirgichi', 'Планировщик учёбы и жизни'),
+  'short': ('My university week in one calendar: classes by pair, A and B weeks, deadlines with files, notes during class, and reminders. Hold and drag a class to move it.', 'Universitet haftam bitta taqvimda: juftliklar bo‘yicha darslar, A va B haftalar, fayl biriktirilgan muddatlar, dars paytidagi qaydlar va eslatmalar. Darsni bosib turing va surib ko‘chiring.', 'Моя учебная неделя в одном календаре: пары, недели A и B, дедлайны с файлами, заметки на паре и напоминания. Зажмите пару и перетащите, чтобы перенести.'),
+  'for': ('Students who juggle classes, assignments and life, starting with me', 'Darslar, topshiriqlar va hayotni birga olib boradigan talabalar, mendan boshlab', 'Студентам, которые совмещают пары, задания и жизнь, начиная с меня'),
+  'on': ('Any browser · installable · offline', 'Istalgan brauzer · o‘rnatiladi · oflayn', 'Любой браузер · устанавливается · офлайн'),
+  'langs': ('English, with Uzbek subject names', 'Ingliz tili, fanlar nomi o‘zbekcha', 'Английский, названия предметов на узбекском'),
+  'price': ('Free', 'Bepul', 'Бесплатно'),
+  'sign': ('None · saves in the browser', 'Kerak emas · brauzerda saqlanadi', 'Не нужен · сохраняет в браузере'),
+ },
  'vault': {
   'tag': ('Video studio for WonderVault', 'WonderVault uchun video studiya', 'Видеостудия для WonderVault'),
   'short': ('Script, edit and thumbnail Shorts and long videos for my amazing-facts channel.', 'Ajoyib faktlar kanalim uchun Shorts va uzun videolarni yozish, montaj qilish va muqova yasash.', 'Сценарии, монтаж и обложки для Shorts и длинных видео моего канала об удивительных фактах.'),

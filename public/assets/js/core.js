@@ -272,6 +272,7 @@
         { t: 'ClivEdu Class', s: t('pd.class.tag', 'The live classroom'), href: r + 'products/class.html', ic: 'cap', c: 'var(--turq)', g: 'products' },
         { t: 'Sprachwerk', s: t('pd.sprachwerk.tag', 'German, engineered'), href: r + 'products/sprachwerk.html', ic: 'globe', c: 'var(--gold)', g: 'products' },
         { t: 'Vault Studio', s: t('pd.vault.tag', 'Video studio for WonderVault'), href: r + 'products/vault-studio.html', ic: 'video', c: 'var(--amber)', g: 'products' },
+        { t: 'Reja', s: t('pd.reja.tag', 'Study & life planner'), href: r + 'reja/', ic: 'calendar', c: 'var(--violet)', g: 'products' },
         { t: t('cmd.focus25', 'Start a 25-minute focus'), href: r + 'vaqt/index.html#focus', ic: 'timer', c: 'var(--green)', g: 'actions', act: function () { try { sessionStorage.setItem('vaqt.autostart', '25'); } catch (e) {} } },
         { t: t('cmd.theme', 'Switch day / night'), ic: 'moon', g: 'actions', act: function () { set('theme', root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); } },
         { t: 'English', ic: 'globe', g: 'actions', act: function () { set('lang', 'en'); } },

@@ -48,7 +48,7 @@ w('site.webmanifest', json.dumps({
   'icons': [{'src': 'assets/img/icon-192.png', 'sizes': '192x192', 'type': 'image/png'}, {'src': 'assets/img/icon-512.png', 'sizes': '512x512', 'type': 'image/png'}]
 }, indent=2))
 
-urls = [k for k in pages if k not in ('404.html',)] + ['vaqt/']
+urls = [k for k in pages if k not in ('404.html',)] + ['vaqt/', 'reja/']
 base = SITE.rstrip('/') + '/' if SITE else 'https://YOUR-SITE.netlify.app/'
 w('sitemap.xml', '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + ''.join(f'<url><loc>{base}{u}</loc></url>' for u in urls) + '</urlset>\n')
 w('robots.txt', f'User-agent: *\nAllow: /\nSitemap: {base}sitemap.xml\n')
