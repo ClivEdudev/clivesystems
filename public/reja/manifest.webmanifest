@@ -1,0 +1,20 @@
+{
+  "name": "Reja · study & life planner",
+  "short_name": "Reja",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0B0E1E",
+  "theme_color": "#0B0E1E",
+  "description": "Timetable, deadlines with files, reminders and class notes.",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ],
+  "shortcuts": [
+    { "name": "Today", "url": "./#today" },
+    { "name": "Calendar", "url": "./#calendar" },
+    { "name": "Assignments", "url": "./#tasks" }
+  ]
+}

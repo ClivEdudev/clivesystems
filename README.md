@@ -98,3 +98,14 @@ source/            page generator (Python 3, no packages needed)
 ```
 
 Made by Imonqulov Baxriddin (Clive) · Telegram @clive077 · imonkulovclive@gmail.com
+
+## Reja, the study and life planner (`public/reja/`)
+
+A standalone app at `/reja/` (plain HTML, CSS and JS, no build step).
+
+- Timetable with numbered pairs and an alternating A/B week (the Thursday ICT lecture is week A only). Edit pairs, class times and the week parity in Settings.
+- Calendar: day, week, month and agenda views; lectures, seminars and labs styled differently; deadlines shown as flags; tap an empty slot to add an event.
+- Assignments with a deadline date and time, priority, status (list or board), reminders (at the deadline up to 1 week before) and attached files of any type (up to 60 MB each, stored in IndexedDB in the browser).
+- Quick notes during a live class: plain notes, homework (becomes an assignment due at the next class of that subject), or an extra lesson (added to the calendar).
+- Reminders: browser notifications while Reja is open or installed, plus a `.ics` export with alarms for phone calendars.
+- Data stays in the browser (`localStorage` key `reja.v1`, files in IndexedDB `reja-files`); JSON backup and restore in Settings.

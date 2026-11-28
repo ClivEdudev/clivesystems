@@ -43,6 +43,7 @@ def orbit_body():
       'class': (215, 430, 34, 'var(--turq)', 'ClivEdu Class', 'pd.class.tag', 'products/class.html'),
       'dilnura': (60, 530, 20, 'var(--turq)', 'Dilnura Edu', None, 'work.html'),
       'sprachwerk': (790, 180, 34, 'var(--gold)', 'Sprachwerk', 'pd.sprachwerk.tag', 'products/sprachwerk.html'),
+      'reja': (915, 300, 30, 'var(--violet)', 'Reja', 'pd.reja.tag', 'products/reja.html'),
       'vault': (785, 430, 30, 'var(--amber)', 'Vault Studio', 'pd.vault.tag', 'products/vault-studio.html'),
       'wv': (945, 530, 20, 'var(--rose)', 'WonderVault', None, YT),
       'shop': (500, 520, 28, 'var(--rose)', 'Whop shop', None, 'shop.html'),
@@ -54,6 +55,7 @@ def orbit_body():
       ('clivedu','sprachwerk','M244 186 Q500 250 756 186','var(--gold)', 'o.l.sync','same sign-in & progress sync','bir xil kirish va sinxronlash','один вход и синхронизация', (500, 214)),
       ('vaqt','clivedu','M470 84 Q330 90 240 160','var(--green)', 'o.l.focus','focus for study','o‘qish uchun fokus','фокус для учёбы', (330, 100)),
       ('vaqt','sprachwerk','M530 84 Q670 90 760 160','var(--green)', 'o.l.focus','focus for study','o‘qish uchun fokus','фокус для учёбы', (670, 100)),
+      ('vaqt','reja','M534 74 Q900 80 912 266','var(--violet)', 'o.l.plan','plan the week, then focus','haftani rejalang, keyin fokus','спланируй неделю — и фокус', (905, 150)),
       ('vault','wv','M810 450 L930 518','var(--rose)', 'o.l.videos','makes the videos','videolarni tayyorlaydi','делает видео', (905, 470)),
     ]
     svg = ['<svg viewBox="0 0 1000 580" role="img" aria-labelledby="ctitle"><title id="ctitle">How the Clive products connect</title>']
@@ -86,13 +88,13 @@ def orbit_body():
     hero = f'''<section class="phero"><div class="wrap">
 <div class="crumbs"><a href="index.html">Clive</a>{ic('chevr')}<span>{T('nav.orbit','Orbit','Orbita','Орбита')}</span></div>
 {T('o.h','The Clive orbit','Clive orbitasi','Орбита Clive','h1')}
-{T('o.p','Five products and a shop, made by one person. What each one does, who it’s for, and how they help each other.','Bir inson yaratgan beshta mahsulot va do‘kon. Har biri nima qiladi, kim uchun va bir-biriga qanday yordam beradi.','Пять продуктов и магазин, сделанные одним человеком. Что делает каждый, для кого он и как они помогают друг другу.','p','lead')}
+{T('o.p','Six products and a shop, made by one person. What each one does, who it’s for, and how they help each other.','Bir inson yaratgan oltita mahsulot va do‘kon. Har biri nima qiladi, kim uchun va bir-biriga qanday yordam beradi.','Шесть продуктов и магазин, сделанные одним человеком. Что делает каждый, для кого он и как они помогают друг другу.','p','lead')}
 <div class="const card mt3" data-reveal>{''.join(svg)}</div>
 <ul class="conlist mt2">{conl}</ul>
 </div></section>'''
 
     rows = []
-    order = ['vaqt','clivedu','class','sprachwerk','vault']
+    order = ['vaqt','reja','clivedu','class','sprachwerk','vault']
     for i,pid in enumerate(order):
         p = P(pid)
         if pid == 'vaqt':
@@ -132,7 +134,7 @@ ORBIT_JS = 'assets/js/orbitpage.js'
 
 def build_orbit():
     return page('ecosystem', '', 'pt.orbit', 'The orbit', 'Orbita', 'Орбита',
-                'All Clive products in one place: Vaqt, ClivEdu, ClivEdu Class, Sprachwerk and Vault Studio, and how they connect.',
+                'All Clive products in one place: Vaqt, Reja, ClivEdu, ClivEdu Class, Sprachwerk and Vault Studio, and how they connect.',
                 orbit_body(), ORBIT_CSS, ['assets/js/garden.js', ORBIT_JS])
 
 # ------------------------------------------------------------------ work

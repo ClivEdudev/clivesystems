@@ -8,14 +8,14 @@
     if (!prof.since) prof.since = Date.now();
     function saveP() { C.save('clive.profile', prof); }
     function renderProfile() {
-      var av = $('#av'); av.style.setProperty('--av', 'var(--' + (prof.av || 'blue') + ')');
+      var av = $('#av'); if (!av) return; av.style.setProperty('--av', 'var(--' + (prof.av || 'blue') + ')');
       var nm0 = (prof.name || '').trim(); $('#av-i').textContent = nm0 ? nm0.charAt(0).toUpperCase() : ''; av.classList.toggle('empty', !nm0);
       C.$$('[data-av]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-av') === prof.av)); });
       C.$$('[data-goal]').forEach(function (b) { b.setAttribute('aria-pressed', String((prof.goals || []).indexOf(b.getAttribute('data-goal')) >= 0)); });
       var d = new Date(prof.since);
       $('#pf-since').textContent = 'Clive ID · ' + d.toLocaleDateString(C.S.lang === 'uz' ? 'uz-UZ' : C.S.lang === 'ru' ? 'ru-RU' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
     }
-    var nm = $('#pf-name'); nm.value = prof.name || '';
+    var nm = $('#pf-name') || document.createElement('input'); nm.value = prof.name || '';
     nm.addEventListener('input', function () { prof.name = nm.value.slice(0, 40); saveP(); renderProfile(); });
     C.$$('[data-av]').forEach(function (b) { b.addEventListener('click', function () { prof.av = b.getAttribute('data-av'); saveP(); renderProfile(); }); });
     C.$$('[data-goal]').forEach(function (b) {
@@ -103,6 +103,7 @@
 
     renderProfile(); stats(); words();
     document.addEventListener('clive:lang', function () { renderProfile(); words(); });
+    document.addEventListener('cid:synced', function () { stats(); words(); });
   }
   if (window.Clive && Clive.booted) go(); else document.addEventListener('clive:ready', go);
 })();

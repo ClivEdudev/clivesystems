@@ -56,7 +56,7 @@ def feat_grid(pid, feats, c):
 def how_grid(pid, steps, c):
     return '<div class="grid how">' + ''.join(f'<article class="card" style="--c:{c}" data-reveal="{i*80}"><span class="n">{i+1}</span>{T(f"pp.{pid}.h{i}.h",*h,tag="h3")}{T(f"pp.{pid}.h{i}.p",*p,tag="p")}</article>' for i,(h,p) in enumerate(steps)) + '</div>'
 
-ORDER = ['vaqt','clivedu','class','sprachwerk','vault']
+ORDER = ['vaqt','reja','clivedu','class','sprachwerk','vault']
 
 def product_page(pid, hero_pic, feats, steps, built, extra='', logo=None, open_label=None, sec_btn=''):
     p = P(pid); c = p['c']
@@ -189,6 +189,21 @@ def build_all():
 <div class="row"><a class="btn primary" style="--c:var(--amber);--ci:#1b0d00" href="{YT}" target="_blank" rel="noopener">{ic('youtube')}@wondervaultclive{ic('ext')}</a></div></div></div></section>'''
     out['vault'] = product_page('vault', comp('vault','wondervaultyoutube.netlify.app'), feats, steps, 'One static HTML page · Canvas · browser storage · Netlify', extra)
 
+    # ---------------- Reja
+    feats = [
+     ('calendar',('A real calendar','Haqiqiy taqvim','Настоящий календарь'),('Day, week, month and agenda views. Classes sit in their pairs, events and extra lessons around them, deadlines as red flags.','Kun, hafta, oy va ro‘yxat ko‘rinishlari. Darslar o‘z juftliklarida, tadbirlar va qo‘shimcha darslar atrofida, muddatlar qizil bayroqchalar bilan.','Вид дня, недели, месяца и списка. Пары стоят на своих местах, события и доп. занятия вокруг, дедлайны — красными флажками.')),
+     ('hand',('Hold and drag','Bosib turing va suring','Зажмите и перетащите'),('Press and hold a class, drag it to another day or pair, then choose: only this time, or every week from now on. Undo is one tap away.','Darsni bosib turing, boshqa kun yoki juftlikka suring va tanlang: faqat shu safar yoki bundan buyon har hafta. Bekor qilish bir bosishda.','Зажмите пару, перетащите на другой день или пару и выберите: только в этот раз или каждую неделю. Отмена — одним касанием.')),
+     ('repeat',('A and B weeks','A va B haftalar','Недели A и B'),('Classes that run every other week show up only in their week, so the timetable never lies.','Har ikki haftada bir bo‘ladigan darslar faqat o‘z haftasida chiqadi, jadval hech qachon adashtirmaydi.','Пары через неделю появляются только в свою неделю, и расписание не врёт.')),
+     ('upload',('Deadlines with files','Fayl biriktirilgan muddatlar','Дедлайны с файлами'),('Give each assignment a date, a time and any files up to 45 MB: the brief, a photo of the board, a recording.','Har bir topshiriqqa sana, vaqt va 45 MB gacha istalgan fayl biriktiring: topshiriq matni, doska surati, yozuv.','У каждого задания дата, время и любые файлы до 45 МБ: условие, фото доски, запись.')),
+     ('pen',('Notes during class','Dars paytida qaydlar','Заметки на паре'),('A quick note box for the class that is on right now. Homework becomes an assignment, an extra lesson lands in the calendar.','Hozir ketayotgan dars uchun tezkor qayd maydoni. Uy vazifasi topshiriqqa, qo‘shimcha dars taqvimga aylanadi.','Быстрая заметка для текущей пары. Домашка становится заданием, доп. занятие попадает в календарь.')),
+     ('bell',('Reminders','Eslatmalar','Напоминания'),('Browser notifications a day and a few hours before each deadline, plus an .ics export so your phone calendar rings too.','Har bir muddatdan bir kun va bir necha soat oldin brauzer bildirishnomasi, telefon taqvimi ham eslatishi uchun .ics eksport.','Уведомления браузера за день и за несколько часов до дедлайна и экспорт .ics, чтобы напомнил и календарь телефона.')),
+    ]
+    steps = [(('Check the timetable','Jadvalni tekshiring','Проверьте расписание'),('Your subjects, pair times and A/B weeks are already in Settings. Drag anything that changed.','Fanlaringiz, juftlik vaqtlari va A/B haftalar Sozlamalarda tayyor. O‘zgarganini surib qo‘ying.','Предметы, время пар и недели A/B уже в настройках. Перетащите то, что изменилось.')),
+             (('Add what is due','Muddatlarni qo‘shing','Добавьте дедлайны'),('Each assignment gets a deadline, files and reminders.','Har bir topshiriq muddat, fayl va eslatmalarga ega bo‘ladi.','У каждого задания дедлайн, файлы и напоминания.')),
+             (('Open Today','Bugunni oching','Откройте «Сегодня»'),('See the class that is on now, write notes, and tick off what is done.','Hozirgi darsni ko‘ring, qayd yozing va bajarilganini belgilang.','Смотрите текущую пару, пишите заметки и отмечайте сделанное.'))]
+    out['reja'] = product_page('reja', comp('reja','clivesystems.netlify.app/reja'), feats, steps, 'HTML, CSS, JavaScript · IndexedDB for files · Notifications · service worker · .ics export', '',
+        open_label=T('pp.reja.open','Open Reja','Reja’ni ochish','Открыть Reja'))
+
     # ---------------- Vaqt
     feats = [
      ('leaf',('Grow a garden','Bog‘ o‘stiring','Растите сад'),('34 Uzbek plants in five rarity tiers, from lola and rayhon to chinor, lotus and the eight-point star flower. Each one is drawn with real light and shade, and about one session in 25 grows a golden one.','Beshta noyoblik darajasidagi 34 ta o‘zbek o‘simligi: lola va rayhondan chinor, nilufar va sakkiz qirrali yulduzgulgacha. Har biri haqiqiy yorug‘lik va soya bilan chizilgan, taxminan har 25 sessiyadan biri oltin o‘simlik beradi.','34 узбекских растения пяти уровней редкости: от лолы и райхона до чинары, лотоса и восьмиконечного звёздного цветка. Каждое нарисовано с настоящим светом и тенью, а примерно каждая 25-я сессия даёт золотое.')),
@@ -227,6 +242,7 @@ def build():
     titles = {'clivedu':('ClivEdu','ClivEdu','ClivEdu','ClivEdu: an English classroom among the stars, with a Word Galaxy, games, homework and a teacher desk.'),
               'class':('ClivEdu Class','ClivEdu Class','ClivEdu Class','ClivEdu Class at clivedu.me: the live classroom for Clive’s English groups.'),
               'sprachwerk':('Sprachwerk','Sprachwerk','Sprachwerk','Sprachwerk: learn German with Linie A1, slide lessons, Berlin Missions and Shadow Studio.'),
+              'reja':('Reja · study planner','Reja · o‘qish rejasi','Reja · планировщик учёбы','Reja: a study and life planner with a real calendar, A/B weeks, drag-to-move classes, deadlines with files and reminders.'),
               'vault':('Vault Studio','Vault Studio','Vault Studio','Vault Studio: a browser video studio for the WonderVault YouTube channel.'),
               'vaqt':('Vaqt · focus garden','Vaqt · fokus bog‘i','Vaqt · сад фокуса','Vaqt: a focus timer and time tracker that grows an Uzbek garden. 34 plants, a bazaar, levels and 57 awards. Free, offline, in three languages.')}
     out = {}

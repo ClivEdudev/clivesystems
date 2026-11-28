@@ -149,6 +149,8 @@ def build_learn():
 
 # ================================================================== JOURNAL
 JOURNAL = [
+ ('2026-11-28','build',('Reja: a planner for study and life','Reja: o‘qish va hayot uchun rejalashtiruvchi','Reja: планировщик для учёбы и жизни'),
+  ('A new app for my own semester: the timetable with its every-other-week class, deadlines with files and reminders, and a note box for the class that is happening right now.','O‘z semestrim uchun yangi ilova: har ikki haftada bo‘ladigan darsi bilan dars jadvali, fayl va eslatmali muddatlar, hozir ketayotgan dars uchun eslatma oynasi.','Новое приложение для моего семестра: расписание с парой через неделю, дедлайны с файлами и напоминаниями и заметки к паре, которая идёт прямо сейчас.'),'reja/'),
  ('2026-11-27','build',('Vaqt sounds, recorded for real','Vaqt ovozlari endi haqiqiy','Звуки Vaqt теперь настоящие'),
   ('The generated noise is gone. Vaqt now plays real recordings: rain drops on leaves, a mountain stream, ocean waves, a campfire, wind in the trees and a ticking clock, plus four new ones for winding down: a thunderstorm, birdsong, night crickets and wind chimes. Each loops without a seam and works offline after the first play.','Sun’iy shovqin olib tashlandi. Endi Vaqt haqiqiy yozuvlarni chaladi: barglarga tushayotgan yomg‘ir tomchilari, tog‘ soyi, dengiz to‘lqinlari, gulxan, daraxtlardagi shamol va soat chiqillashi. Yana tinchlanish uchun to‘rtta yangisi: momaqaldiroq, qushlar sayrashi, tungi chirildoqlar va shamol qo‘ng‘iroqchalari. Har biri uzluksiz aylanadi va birinchi chalinishdan keyin oflayn ishlaydi.','Сгенерированный шум убран. Теперь Vaqt играет настоящие записи: капли дождя по листьям, горный ручей, морские волны, костёр, ветер в деревьях и тиканье часов, и ещё четыре для отдыха: гроза, пение птиц, ночные сверчки и музыка ветра. Каждая играет по кругу без шва и работает офлайн после первого запуска.'),'vaqt/index.html#sounds'),
  ('2026-11-27','build',('Vaqt 2.1: 34 plants with real light','Vaqt 2.1: haqiqiy yorug‘likdagi 34 o‘simlik','Vaqt 2.1: 34 растения с настоящим светом'),
@@ -353,7 +355,7 @@ def about_body():
 {T('a.s3','For hotels, shops and cafés in Andijan I make sites that work on cheap phones and speak three languages. And when I need to focus, I grow a garden. That’s Vaqt, the newest planet here.','Andijondagi mehmonxonalar, do‘konlar va kafelar uchun arzon telefonlarda ishlaydigan va uch tilda gapiradigan saytlar yarataman. Diqqatimni jamlashim kerak bo‘lganda esa bog‘ o‘stiraman. Bu Vaqt — bu yerdagi eng yangi sayyora.','Для отелей, магазинов и кафе Андижана я делаю сайты, которые работают на дешёвых телефонах и говорят на трёх языках. А когда мне нужно сосредоточиться, я выращиваю сад. Это Vaqt — самая новая планета здесь.','p')}
 </div><div class="row mt2"><a class="btn primary" href="contact.html">{T('a.cta','Say hi','Salom deng','Напишите мне')}{ic('arrow')}</a><a class="btn ghost" href="journal.html">{T('h.hat4.a','Read the journal','Kundalikni o‘qish','Читать дневник')}</a></div></div>
 <div data-reveal><div class="idc" id="idc" aria-label="Clive ID card">
-<div class="hd"><span>CLIVE ID · UZ</span>{mark("idm", 42)}</div>
+<div class="hd"><span>c-ID · UZ</span>{mark("idm", 42)}</div>
 <div class="nm"><b>Clive</b><span>Imonqulov Baxriddin</span></div>
 <dl><div><dt>{T('a.id.r','Roles','Rollar','Роли')}</dt><dd>{T('a.id.rv','Teacher · Dev · Maker','O‘qituvchi · Dasturchi · Yaratuvchi','Учитель · Разработчик · Автор')}</dd></div>
 <div><dt>{T('a.id.b','Base','Joy','Где')}</dt><dd>{T('a.id.bv','Uzbekistan · UTC+5','O‘zbekiston · UTC+5','Узбекистан · UTC+5')}</dd></div>
@@ -528,7 +530,7 @@ LINKS_CSS = '''
 .lk a.l>svg{margin-left:auto;width:18px;height:18px;color:var(--mute);flex:none}
 '''
 def links_body():
-    L = [('var(--green)','leaf','Vaqt','vaqt/index.html','pd.vaqt.tag'),('var(--turq)','cap','ClivEdu Class','https://clivedu.me/','pd.class.tag'),('var(--blue)','star','ClivEdu',P('clivedu')['url'],'pd.clivedu.tag'),('var(--gold)','globe','Sprachwerk',P('sprachwerk')['url'],'pd.sprachwerk.tag'),('var(--rose)','book','Technical Issues Q&amp;A',WHOP_EBOOK,None),('var(--amber)','youtube','WonderVault',YT,None),('var(--turq)','send','Telegram @clive077',TG,None),('var(--blue)','mail','Email','mailto:'+EMAIL,None),('var(--violet)','orbit','clive · orbit','index.html',None)]
+    L = [('var(--green)','leaf','Vaqt','vaqt/index.html','pd.vaqt.tag'),('var(--turq)','cap','ClivEdu Class','https://clivedu.me/','pd.class.tag'),('var(--blue)','star','ClivEdu',P('clivedu')['url'],'pd.clivedu.tag'),('var(--gold)','globe','Sprachwerk',P('sprachwerk')['url'],'pd.sprachwerk.tag'),('var(--violet)','calendar','Reja','reja/','pd.reja.tag'),('var(--rose)','book','Technical Issues Q&amp;A',WHOP_EBOOK,None),('var(--amber)','youtube','WonderVault',YT,None),('var(--turq)','send','Telegram @clive077',TG,None),('var(--blue)','mail','Email','mailto:'+EMAIL,None),('var(--violet)','orbit','clive · orbit','index.html',None)]
     out = ''
     for i,(c,icn,n,u,sub) in enumerate(L):
         ext = u.startswith('http')
@@ -598,6 +600,83 @@ ME_CSS = '''
 @media(max-width:560px){.words div{grid-template-columns:1fr 1fr 40px}.words div span:nth-child(3),.words div span:nth-child(4){display:none}}
 .confirm{display:none;gap:10px;align-items:center;flex-wrap:wrap;padding:12px;border-radius:14px;border:1px solid var(--rose);background:color-mix(in srgb,var(--rose) 10%,transparent)}
 .confirm.on{display:flex}
+
+/* ---------- c-ID ---------- */
+.cidwrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(20px,3vw,44px);align-items:center}
+@media(max-width:980px){.cidwrap{grid-template-columns:1fr}}
+.cidstage{perspective:1600px;padding:clamp(6px,2vw,24px) 0;position:relative}
+.cidstage::before{content:"";position:absolute;inset:8% 4%;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--violet) 45%,transparent),transparent);filter:blur(40px);opacity:.7;z-index:-1}
+.cidcard{--rx:0deg;--ry:0deg;--hx:50%;--hy:30%;--ha:40deg;width:min(100%,640px);margin:0 auto;aspect-ratio:1.586;container-type:inline-size;position:relative;transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .25s ease-out;transform-style:preserve-3d;cursor:grab}
+.cidin{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.cidcard.flip .cidin{transform:rotateY(180deg)}
+.cidcard .face{position:absolute;inset:0;border-radius:5.4cqw;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#07071c;color:#fff;box-shadow:0 4cqw 9cqw -3cqw rgba(60,30,200,.65),0 0 0 1px rgba(255,255,255,.16) inset,0 1px 0 rgba(255,255,255,.35) inset}
+.cidcard .back{transform:rotateY(180deg)}
+.cidcard canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;pointer-events:none}
+.cidcard .holo{position:absolute;inset:0;pointer-events:none;mix-blend-mode:color-dodge;opacity:.28;background:conic-gradient(from var(--ha) at var(--hx) var(--hy),#ff6fae,#f5c04a,#22cfc6,#9b7bff,#ff6fae);mask:linear-gradient(115deg,transparent 20%,#000 45%,transparent 60%,#000 80%,transparent);-webkit-mask:linear-gradient(115deg,transparent 20%,#000 45%,transparent 60%,#000 80%,transparent);transition:opacity .3s}
+.cidcard:hover .holo{opacity:.45}
+.cidcard .glare{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--hx) var(--hy),rgba(255,255,255,.22),transparent 45%);mix-blend-mode:overlay}
+.specimen{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-18deg);font:700 11cqw/1 var(--head);letter-spacing:.08em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.22);pointer-events:none;z-index:3}
+.cf,.cb{position:absolute;inset:0;padding:4.6cqw 5.2cqw 3.6cqw;display:flex;flex-direction:column;z-index:2;font-size:2.4cqw;text-shadow:0 1px 3px rgba(4,3,20,.9),0 0 14px rgba(4,3,20,.85)}
+.cf header{display:flex;justify-content:space-between;align-items:flex-start}
+.cf .brand{display:flex;align-items:center;gap:1.2cqw;font:700 2.1cqw/1 var(--head);letter-spacing:.32em;opacity:.92}
+.cf .brand svg,.rank svg{width:3cqw;height:3cqw;color:#f5c04a;filter:drop-shadow(0 0 1cqw rgba(245,192,74,.7))}
+.cf .ttl{text-align:right;line-height:1}
+.cf .ttl b{display:block;font:700 7.4cqw/1 var(--head);letter-spacing:-.02em;background:linear-gradient(100deg,#fff 10%,#cbbcff 40%,#7ff1e8 70%,#ffd6f0);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 2cqw rgba(155,123,255,.55))}
+.cf .ttl small{display:block;margin-top:.8cqw;font-size:1.6cqw;letter-spacing:.24em;text-transform:uppercase;opacity:.75}
+.cf .mid{flex:1;display:flex;gap:4.2cqw;align-items:center;position:relative;min-height:0}
+.cf .ph{flex:none;width:25cqw;aspect-ratio:1;border-radius:4.4cqw;position:relative;display:grid;place-items:center;background:linear-gradient(135deg,#2b1a6b,#0d1a3a);box-shadow:0 0 0 .5cqw rgba(255,255,255,.85),0 0 0 1.1cqw rgba(155,123,255,.55),0 0 6cqw rgba(155,123,255,.7)}
+.cf .ph img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.cf .ph b{font:700 10cqw/1 var(--head)}
+.cf .ph.rk4,.cf .ph.rk5,.cf .ph.rk6{box-shadow:0 0 0 .5cqw #fff4c9,0 0 0 1.1cqw rgba(245,192,74,.75),0 0 7cqw rgba(245,192,74,.6)}
+.cf .info{min-width:0;flex:1}
+.cf .info>small,.cf dt{display:block;font-size:1.5cqw;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+.cf .nm{font:700 5cqw/1.05 var(--head);margin:.6cqw 0 1.2cqw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff}
+.cf .rank{display:inline-flex;align-items:center;gap:1cqw;padding:.7cqw 1.8cqw;border-radius:99px;font-weight:800;font-size:1.9cqw;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(6px)}
+.cf dl{display:grid;grid-template-columns:1fr 1fr;gap:1.6cqw 3cqw;margin:2.2cqw 0 0}
+.cf dl .wide{grid-column:1/-1}
+.cf dd{margin:.4cqw 0 0;font-weight:700;font-size:2.4cqw}
+.cf dd.num{font:600 3.6cqw/1 ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;letter-spacing:.1em;color:#fff4d6;filter:drop-shadow(0 0 1.2cqw rgba(4,3,20,.95)) drop-shadow(0 0 .6cqw rgba(245,192,74,.45))}
+.cf .chip{width:7.4cqw;margin:.4cqw 2.6cqw 0 auto;filter:drop-shadow(0 .6cqw 1.2cqw rgba(0,0,0,.5))}
+.cf .nm.long{font-size:3.8cqw;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.cidside p svg{display:inline-block;width:16px;height:16px;vertical-align:-3px}
+.cf .ttl b,.cf dd.num{text-shadow:none}
+.cf .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4cqw;margin-top:2cqw}
+.cf .stats span,.cb .bst span{display:flex;flex-direction:column;gap:.3cqw;padding:1.2cqw 1.6cqw;border-radius:2cqw;background:rgba(10,8,40,.42);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(8px);font-size:1.55cqw;opacity:.95;line-height:1.15}
+.cf .stats b,.cb .bst b{font:700 3.3cqw/1 var(--head)}
+.cf .mrz{margin-top:1.8cqw;font:500 1.75cqw/1.35 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.18em;opacity:.5;white-space:nowrap;overflow:hidden}
+.cb .stripe{position:absolute;left:0;right:0;top:7cqw;height:8cqw;background:linear-gradient(90deg,#0a0a14,#1b1840 50%,#0a0a14);opacity:.85}
+.cb .bgrid{position:relative;margin-top:14cqw;display:grid;grid-template-columns:22cqw 1fr;gap:3cqw;align-items:center}
+.cb .emb{display:grid;place-items:center;text-align:center;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.25),rgba(108,79,240,.25) 45%,rgba(10,8,40,.6));border:1px solid rgba(255,255,255,.3);box-shadow:0 0 5cqw rgba(155,123,255,.5);align-content:center;gap:.6cqw}
+.cb .emb svg{width:7cqw;height:7cqw;color:#f5c04a;filter:drop-shadow(0 0 2cqw rgba(245,192,74,.8))}
+.cb .emb b{font:700 2.4cqw/1 var(--head)}.cb .emb small{font-size:1.4cqw;opacity:.7}
+.cb .bst{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2cqw}
+.cb .bst b{font-size:2.8cqw}
+.cb .cons{margin-top:2.4cqw;position:relative}.cb .cons small{font-size:1.5cqw;letter-spacing:.2em;text-transform:uppercase;opacity:.6}
+.cb .cons svg{display:block;width:100%;height:9cqw}
+.cb .own{position:relative;margin:auto 0 0;font-size:1.7cqw;opacity:.75}
+.cidhint{text-align:center;margin-top:12px}
+.cidside h2{font-size:clamp(1.5rem,2.6vw,2.1rem)}
+.cidside .steps{margin:0;padding-left:1.3em;display:grid;gap:8px}
+.cidnote{display:flex;gap:8px;align-items:flex-start;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--turq) 12%,transparent);border:1px solid color-mix(in srgb,var(--turq) 35%,transparent)}
+.cidnote svg{width:18px;height:18px;flex:none;margin-top:2px}
+.waiting{display:flex;align-items:center;gap:10px}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid var(--line2);border-top-color:var(--violet);animation:cidspin .8s linear infinite;flex:none}
+@keyframes cidspin{to{transform:rotate(360deg)}}
+.cidmodal{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:16px}
+.cidmodal .cm-bg{position:absolute;inset:0;background:rgba(3,4,16,.7);backdrop-filter:blur(6px)}
+.cidmodal .cm{position:relative;width:min(640px,100%);max-height:min(86vh,760px);overflow:auto;border-radius:24px;background:var(--bg2,#0d1030);border:1px solid var(--line2);padding:18px 20px 22px;box-shadow:0 30px 80px -20px rgba(0,0,0,.6)}
+.cm-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.cm-h h3{font-size:1.25rem}
+.cmtabs{margin-bottom:14px}
+.avgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:10px;margin-bottom:12px}
+.avgrid button{aspect-ratio:1;border-radius:18px;overflow:hidden;padding:0;border:2px solid transparent;box-shadow:0 0 0 1px var(--line);transition:transform .15s}
+.avgrid button:hover{transform:translateY(-2px) scale(1.03)}
+.avgrid button[aria-pressed=true]{border-color:var(--violet);box-shadow:0 0 0 3px color-mix(in srgb,var(--violet) 40%,transparent)}
+.avgrid img{width:100%;height:100%;object-fit:cover;display:block}
+.upl{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:start}
+.upv{width:120px;height:120px;border-radius:24px;display:grid;place-items:center;background:var(--card2);border:1px dashed var(--line2);overflow:hidden}
+.upv img{width:100%;height:100%;object-fit:cover}.upv svg{width:40px;height:40px;opacity:.5}
+@media(max-width:520px){.upl{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.cidin,.cidcard{transition:none}}
 '''
 def me_body():
     sw = ''.join(f'<button data-av="{v}" style="--c:var(--{v})" aria-label="{v}"></button>' for v in ['blue','turq','gold','green','amber','rose','violet'])
@@ -611,19 +690,17 @@ def me_body():
               ('m.reset.ok','Everything on this device was cleared.','Bu qurilmadagi hamma narsa o‘chirildi.','Всё на этом устройстве удалено.'),('m.nowords','No saved words yet. Save one from the word of the day on the home page.','Hali saqlangan so‘z yo‘q. Bosh sahifadagi kun so‘zidan birini saqlang.','Сохранённых слов пока нет. Сохраните слово дня на главной.'),
               ('m.copied.bk','Backup copied. Paste it into a note to keep it.','Zaxira nusxalandi. Saqlash uchun eslatmaga joylang.','Копия скопирована. Вставьте её в заметку, чтобы сохранить.'),('m.guest','Guest','Mehmon','Гость')]:
         J(*k)
-    return f'''<section class="phero" style="padding-bottom:24px"><div class="wrap">
-{crumbs('nav.me','Clive ID','Clive ID','Clive ID')}
-{T('m.h','Clive ID','Clive ID','Clive ID','h1')}
-{T('m.p','Your profile and settings for the whole orbit. It lives in this browser; a sync code or a backup moves it to another device. No password, no tracking.','Butun orbita uchun profilingiz va sozlamalaringiz. U shu brauzerda saqlanadi; sinxron kod yoki zaxira uni boshqa qurilmaga ko‘chiradi. Parolsiz, kuzatuvsiz.','Ваш профиль и настройки для всей орбиты. Всё хранится в этом браузере; код синхронизации или резервная копия перенесут его на другое устройство. Без пароля и слежки.','p','lead')}
+    return f'''<section class="phero" style="padding-bottom:12px"><div class="wrap">
+{crumbs('nav.me','c-ID','c-ID','c-ID')}
+{T('m.h','c-ID','c-ID','c-ID','h1')}
+{T('m.p','One ID for the whole Clive orbit. You get it by signing in with Telegram through @clivedubot, so every person has exactly one. Your number, your picture and your progress live inside it.','Butun Clive orbitasi uchun bitta ID. Uni @clivedubot orqali Telegram bilan kirib olasiz, shuning uchun har bir insonda faqat bittasi bo‘ladi. Raqamingiz, rasmingiz va natijalaringiz uning ichida.','Один ID для всей орбиты Clive. Его получают, войдя через Telegram в @clivedubot, поэтому у каждого он ровно один. Внутри — ваш номер, фото и прогресс.','p','lead')}
 </div></section>
-<section class="band tight" style="padding-top:0"><div class="wrap me">
-<aside class="card pcard" data-reveal>
-<div class="avatar" id="av"><svg viewBox="0 0 64 64"><path d="{star_path(32,32,28)}" fill="none" stroke="currentColor" stroke-width="3"/></svg><b id="av-i">C</b></div>
-<div class="avc" id="avc">{sw}</div>
-<label class="fl" style="text-align:left"><span class="small" style="font-weight:700">{T('m.name','Your name','Ismingiz','Ваше имя')}</span><input class="input" id="pf-name" maxlength="40" autocomplete="nickname" placeholder="{A('m.name.ph','What should I call you?','Sizni qanday chaqiray?','Как к вам обращаться?')}" data-i18n-attr="placeholder:m.name.ph"></label>
-<div style="text-align:left" class="field"><span class="small">{T('m.goal','What brings you here?','Sizni bu yerga nima olib keldi?','Что привело вас сюда?')}</span><div class="chk" id="goals">{gb}</div></div>
-<p class="small faint" id="pf-since"></p>
-</aside>
+<section class="band tight" style="padding-top:0"><div class="wrap cidwrap">
+<div><div class="cidstage" id="cidstage"><div class="cidcard" id="cidcard" aria-label="c-ID card"></div></div>
+{T('m.hint','Double-click or swipe the card to turn it over.','Kartani aylantirish uchun ikki marta bosing yoki suring.','Дважды нажмите или проведите по карте, чтобы перевернуть её.','p','small faint cidhint')}</div>
+<div class="card cidside" id="cidside" aria-live="polite"></div>
+</div></section>
+<section class="band tight" style="padding-top:0"><div class="wrap">
 <div class="sect">
 <div class="card" data-reveal style="--c:var(--green)"><div class="row between"><h2>{T('m.f.h','Your focus','Fokusingiz','Ваш фокус')}</h2><a class="btn primary sm" href="vaqt/index.html" style="--c:var(--green);--ci:#03170d">{ic('leaf')}Vaqt</a></div>
 <div class="grid stats4 mt2"><div class="kpi"><b id="st-today">0</b>{T('m.f1','minutes today','bugun daqiqa','минут сегодня')}</div><div class="kpi"><b id="st-total">0</b>{T('m.f2','minutes in total','jami daqiqa','минут всего')}</div><div class="kpi"><b id="st-plants">0</b>{T('m.f3','plants grown','o‘stirilgan o‘simlik','выращено растений')}</div><div class="kpi"><b id="st-streak">0</b>{T('m.f4','day streak','kunlik seriya','дней подряд')}</div></div></div>
@@ -636,7 +713,7 @@ def me_body():
 <div class="field"><span>{T('dr.accent','Accent colour','Asosiy rang','Акцентный цвет')}</span><div class="swatches">{sw2}</div></div>
 </div></div>
 <div class="card" data-reveal><h2>{T('m.w.h','Saved words','Saqlangan so‘zlar','Сохранённые слова')}</h2><div class="words mt1" id="words"></div></div>
-<div class="card" data-reveal style="--c:var(--blue)"><h2>{T('m.s.h','Move to another device','Boshqa qurilmaga ko‘chirish','Перенос на другое устройство')}</h2>
+<div class="card" id="sync-card" data-reveal style="--c:var(--blue)"><h2>{T('m.s.h','Move to another device','Boshqa qurilmaga ko‘chirish','Перенос на другое устройство')}</h2>
 {T('m.s.p','Upload creates a private sync code. Type the same code on your other phone or computer to bring your profile, settings, words and Vaqt garden with you.','Yuklash shaxsiy sinxron kod yaratadi. Profil, sozlamalar, so‘zlar va Vaqt bog‘ingizni olib o‘tish uchun xuddi shu kodni boshqa telefon yoki kompyuterda kiriting.','Загрузка создаёт личный код синхронизации. Введите тот же код на другом телефоне или компьютере, чтобы перенести профиль, настройки, слова и сад Vaqt.','p','muted')}
 <div class="grid g2 mt2" style="align-items:end">
 <div class="field"><span>{T('m.s.mine','Your sync code','Sinxron kodingiz','Ваш код синхронизации')}</span><div class="code" id="sync-code">—</div><div class="row"><button class="btn primary sm" id="sync-up">{ic('upload')}{T('m.s.up','Upload now','Hozir yuklash','Загрузить сейчас')}</button><button class="btn ghost sm" id="sync-copy">{ic('copy')}{T('m.s.cp','Copy code','Kodni nusxalash','Скопировать код')}</button></div></div>
@@ -649,4 +726,4 @@ def me_body():
 </div></div></section>'''
 
 def build_me():
-    return page('me', '', 'pt.me', 'Clive ID', 'Clive ID', 'Clive ID', 'Your Clive ID: profile, settings, focus stats and sync for the whole orbit.', me_body(), ME_CSS, ['assets/js/me.js'])
+    return page('me', '', 'pt.me', 'c-ID', 'c-ID', 'c-ID', 'c-ID: one sign-in for the whole Clive orbit, through Telegram. Your galaxy ID card with your number, picture and progress.', me_body(), ME_CSS, ['assets/js/me.js','assets/js/cid.js'])

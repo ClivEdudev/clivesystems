@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Clive ID · Clive</title>
+<title>c-ID · Clive</title>
 <meta name="page-title-key" content="pt.me">
-<meta name="description" content="Your Clive ID: profile, settings, focus stats and sync for the whole orbit.">
+<meta name="description" content="c-ID: one sign-in for the whole Clive orbit, through Telegram. Your galaxy ID card with your number, picture and progress.">
 <meta name="theme-color" content="#070A18">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Clive ID · Clive">
-<meta property="og:description" content="Your Clive ID: profile, settings, focus stats and sync for the whole orbit.">
+<meta property="og:title" content="c-ID · Clive">
+<meta property="og:description" content="c-ID: one sign-in for the whole Clive orbit, through Telegram. Your galaxy ID card with your number, picture and progress.">
 <meta property="og:image" content="assets/img/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -45,6 +45,83 @@
 @media(max-width:560px){.words div{grid-template-columns:1fr 1fr 40px}.words div span:nth-child(3),.words div span:nth-child(4){display:none}}
 .confirm{display:none;gap:10px;align-items:center;flex-wrap:wrap;padding:12px;border-radius:14px;border:1px solid var(--rose);background:color-mix(in srgb,var(--rose) 10%,transparent)}
 .confirm.on{display:flex}
+
+/* ---------- c-ID ---------- */
+.cidwrap{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(20px,3vw,44px);align-items:center}
+@media(max-width:980px){.cidwrap{grid-template-columns:1fr}}
+.cidstage{perspective:1600px;padding:clamp(6px,2vw,24px) 0;position:relative}
+.cidstage::before{content:"";position:absolute;inset:8% 4%;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--violet) 45%,transparent),transparent);filter:blur(40px);opacity:.7;z-index:-1}
+.cidcard{--rx:0deg;--ry:0deg;--hx:50%;--hy:30%;--ha:40deg;width:min(100%,640px);margin:0 auto;aspect-ratio:1.586;container-type:inline-size;position:relative;transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .25s ease-out;transform-style:preserve-3d;cursor:grab}
+.cidin{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.cidcard.flip .cidin{transform:rotateY(180deg)}
+.cidcard .face{position:absolute;inset:0;border-radius:5.4cqw;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#07071c;color:#fff;box-shadow:0 4cqw 9cqw -3cqw rgba(60,30,200,.65),0 0 0 1px rgba(255,255,255,.16) inset,0 1px 0 rgba(255,255,255,.35) inset}
+.cidcard .back{transform:rotateY(180deg)}
+.cidcard canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:0;pointer-events:none}
+.cidcard .holo{position:absolute;inset:0;pointer-events:none;mix-blend-mode:color-dodge;opacity:.28;background:conic-gradient(from var(--ha) at var(--hx) var(--hy),#ff6fae,#f5c04a,#22cfc6,#9b7bff,#ff6fae);mask:linear-gradient(115deg,transparent 20%,#000 45%,transparent 60%,#000 80%,transparent);-webkit-mask:linear-gradient(115deg,transparent 20%,#000 45%,transparent 60%,#000 80%,transparent);transition:opacity .3s}
+.cidcard:hover .holo{opacity:.45}
+.cidcard .glare{position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--hx) var(--hy),rgba(255,255,255,.22),transparent 45%);mix-blend-mode:overlay}
+.specimen{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-18deg);font:700 11cqw/1 var(--head);letter-spacing:.08em;text-transform:uppercase;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.22);pointer-events:none;z-index:3}
+.cf,.cb{position:absolute;inset:0;padding:4.6cqw 5.2cqw 3.6cqw;display:flex;flex-direction:column;z-index:2;font-size:2.4cqw;text-shadow:0 1px 3px rgba(4,3,20,.9),0 0 14px rgba(4,3,20,.85)}
+.cf header{display:flex;justify-content:space-between;align-items:flex-start}
+.cf .brand{display:flex;align-items:center;gap:1.2cqw;font:700 2.1cqw/1 var(--head);letter-spacing:.32em;opacity:.92}
+.cf .brand svg,.rank svg{width:3cqw;height:3cqw;color:#f5c04a;filter:drop-shadow(0 0 1cqw rgba(245,192,74,.7))}
+.cf .ttl{text-align:right;line-height:1}
+.cf .ttl b{display:block;font:700 7.4cqw/1 var(--head);letter-spacing:-.02em;background:linear-gradient(100deg,#fff 10%,#cbbcff 40%,#7ff1e8 70%,#ffd6f0);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 2cqw rgba(155,123,255,.55))}
+.cf .ttl small{display:block;margin-top:.8cqw;font-size:1.6cqw;letter-spacing:.24em;text-transform:uppercase;opacity:.75}
+.cf .mid{flex:1;display:flex;gap:4.2cqw;align-items:center;position:relative;min-height:0}
+.cf .ph{flex:none;width:25cqw;aspect-ratio:1;border-radius:4.4cqw;position:relative;display:grid;place-items:center;background:linear-gradient(135deg,#2b1a6b,#0d1a3a);box-shadow:0 0 0 .5cqw rgba(255,255,255,.85),0 0 0 1.1cqw rgba(155,123,255,.55),0 0 6cqw rgba(155,123,255,.7)}
+.cf .ph img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.cf .ph b{font:700 10cqw/1 var(--head)}
+.cf .ph.rk4,.cf .ph.rk5,.cf .ph.rk6{box-shadow:0 0 0 .5cqw #fff4c9,0 0 0 1.1cqw rgba(245,192,74,.75),0 0 7cqw rgba(245,192,74,.6)}
+.cf .info{min-width:0;flex:1}
+.cf .info>small,.cf dt{display:block;font-size:1.5cqw;letter-spacing:.2em;text-transform:uppercase;opacity:.8}
+.cf .nm{font:700 5cqw/1.05 var(--head);margin:.6cqw 0 1.2cqw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff}
+.cf .rank{display:inline-flex;align-items:center;gap:1cqw;padding:.7cqw 1.8cqw;border-radius:99px;font-weight:800;font-size:1.9cqw;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(6px)}
+.cf dl{display:grid;grid-template-columns:1fr 1fr;gap:1.6cqw 3cqw;margin:2.2cqw 0 0}
+.cf dl .wide{grid-column:1/-1}
+.cf dd{margin:.4cqw 0 0;font-weight:700;font-size:2.4cqw}
+.cf dd.num{font:600 3.6cqw/1 ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;letter-spacing:.1em;color:#fff4d6;filter:drop-shadow(0 0 1.2cqw rgba(4,3,20,.95)) drop-shadow(0 0 .6cqw rgba(245,192,74,.45))}
+.cf .chip{width:7.4cqw;margin:.4cqw 2.6cqw 0 auto;filter:drop-shadow(0 .6cqw 1.2cqw rgba(0,0,0,.5))}
+.cf .nm.long{font-size:3.8cqw;white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.cidside p svg{display:inline-block;width:16px;height:16px;vertical-align:-3px}
+.cf .ttl b,.cf dd.num{text-shadow:none}
+.cf .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1.4cqw;margin-top:2cqw}
+.cf .stats span,.cb .bst span{display:flex;flex-direction:column;gap:.3cqw;padding:1.2cqw 1.6cqw;border-radius:2cqw;background:rgba(10,8,40,.42);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(8px);font-size:1.55cqw;opacity:.95;line-height:1.15}
+.cf .stats b,.cb .bst b{font:700 3.3cqw/1 var(--head)}
+.cf .mrz{margin-top:1.8cqw;font:500 1.75cqw/1.35 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.18em;opacity:.5;white-space:nowrap;overflow:hidden}
+.cb .stripe{position:absolute;left:0;right:0;top:7cqw;height:8cqw;background:linear-gradient(90deg,#0a0a14,#1b1840 50%,#0a0a14);opacity:.85}
+.cb .bgrid{position:relative;margin-top:14cqw;display:grid;grid-template-columns:22cqw 1fr;gap:3cqw;align-items:center}
+.cb .emb{display:grid;place-items:center;text-align:center;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.25),rgba(108,79,240,.25) 45%,rgba(10,8,40,.6));border:1px solid rgba(255,255,255,.3);box-shadow:0 0 5cqw rgba(155,123,255,.5);align-content:center;gap:.6cqw}
+.cb .emb svg{width:7cqw;height:7cqw;color:#f5c04a;filter:drop-shadow(0 0 2cqw rgba(245,192,74,.8))}
+.cb .emb b{font:700 2.4cqw/1 var(--head)}.cb .emb small{font-size:1.4cqw;opacity:.7}
+.cb .bst{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2cqw}
+.cb .bst b{font-size:2.8cqw}
+.cb .cons{margin-top:2.4cqw;position:relative}.cb .cons small{font-size:1.5cqw;letter-spacing:.2em;text-transform:uppercase;opacity:.6}
+.cb .cons svg{display:block;width:100%;height:9cqw}
+.cb .own{position:relative;margin:auto 0 0;font-size:1.7cqw;opacity:.75}
+.cidhint{text-align:center;margin-top:12px}
+.cidside h2{font-size:clamp(1.5rem,2.6vw,2.1rem)}
+.cidside .steps{margin:0;padding-left:1.3em;display:grid;gap:8px}
+.cidnote{display:flex;gap:8px;align-items:flex-start;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--turq) 12%,transparent);border:1px solid color-mix(in srgb,var(--turq) 35%,transparent)}
+.cidnote svg{width:18px;height:18px;flex:none;margin-top:2px}
+.waiting{display:flex;align-items:center;gap:10px}
+.spin{width:16px;height:16px;border-radius:50%;border:2px solid var(--line2);border-top-color:var(--violet);animation:cidspin .8s linear infinite;flex:none}
+@keyframes cidspin{to{transform:rotate(360deg)}}
+.cidmodal{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:16px}
+.cidmodal .cm-bg{position:absolute;inset:0;background:rgba(3,4,16,.7);backdrop-filter:blur(6px)}
+.cidmodal .cm{position:relative;width:min(640px,100%);max-height:min(86vh,760px);overflow:auto;border-radius:24px;background:var(--bg2,#0d1030);border:1px solid var(--line2);padding:18px 20px 22px;box-shadow:0 30px 80px -20px rgba(0,0,0,.6)}
+.cm-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.cm-h h3{font-size:1.25rem}
+.cmtabs{margin-bottom:14px}
+.avgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(76px,1fr));gap:10px;margin-bottom:12px}
+.avgrid button{aspect-ratio:1;border-radius:18px;overflow:hidden;padding:0;border:2px solid transparent;box-shadow:0 0 0 1px var(--line);transition:transform .15s}
+.avgrid button:hover{transform:translateY(-2px) scale(1.03)}
+.avgrid button[aria-pressed=true]{border-color:var(--violet);box-shadow:0 0 0 3px color-mix(in srgb,var(--violet) 40%,transparent)}
+.avgrid img{width:100%;height:100%;object-fit:cover;display:block}
+.upl{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:start}
+.upv{width:120px;height:120px;border-radius:24px;display:grid;place-items:center;background:var(--card2);border:1px dashed var(--line2);overflow:hidden}
+.upv img{width:100%;height:100%;object-fit:cover}.upv svg{width:40px;height:40px;opacity:.5}
+@media(max-width:520px){.upl{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.cidin,.cidcard{transition:none}}
 </style>
 <script>(function(){var s={};try{s=JSON.parse(localStorage.getItem('clive.settings')||'{}')||{}}catch(e){}var r=document.documentElement,th=s.theme||r.getAttribute('data-theme')||'dark';if(th==='auto'){th=window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}r.setAttribute('data-theme',th);if(s.accent&&s.accent!=='blue')r.setAttribute('data-accent',s.accent);if(s.motion==='reduced')r.setAttribute('data-motion','reduced');if(s.fs)r.style.setProperty('--fs',s.fs);var l=s.lang;if(!l){var n=(navigator.language||'en').slice(0,2).toLowerCase();l=(n==='uz'||n==='ru')?n:'en'}r.lang=l;r.setAttribute('data-lang',l)})();</script>
 </head>
@@ -59,23 +136,22 @@
 <button class="iconbtn kbtn" data-open="cmdk" aria-label="Search the orbit" data-i18n-attr="aria-label:a.search" title="/"><svg aria-hidden="true"><use href="#i-search"/></svg></button>
 <div class="langsel" role="group" aria-label="Language"><button data-setlang="en" aria-pressed="true">EN</button><button data-setlang="uz" aria-pressed="false">UZ</button><button data-setlang="ru" aria-pressed="false">RU</button></div>
 <button class="iconbtn" data-open="drawer" aria-label="Settings" data-i18n-attr="aria-label:a.settings"><svg aria-hidden="true"><use href="#i-sliders"/></svg></button>
+<a class="iconbtn navreja" href="reja/" aria-label="Reja, my study planner" data-i18n-attr="aria-label:a.reja" title="Reja"><svg aria-hidden="true"><use href="#i-calendar"/></svg></a>
 <a class="btn primary sm navfocus" href="vaqt/index.html"><svg aria-hidden="true"><use href="#i-leaf"/></svg><span data-i18n="nav.focus">Focus</span></a>
 <button class="iconbtn burger" data-open="sheet" aria-label="Menu" data-i18n-attr="aria-label:a.menu"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
 </div></div></header>
 <main id="main">
-<section class="phero" style="padding-bottom:24px"><div class="wrap">
-<div class="crumbs"><a href="index.html">Clive</a><svg aria-hidden="true"><use href="#i-chevr"/></svg><span><span data-i18n="nav.me">Clive ID</span></span></div>
-<h1 data-i18n="m.h">Clive ID</h1>
-<p class="lead" data-i18n="m.p">Your profile and settings for the whole orbit. It lives in this browser; a sync code or a backup moves it to another device. No password, no tracking.</p>
+<section class="phero" style="padding-bottom:12px"><div class="wrap">
+<div class="crumbs"><a href="index.html">Clive</a><svg aria-hidden="true"><use href="#i-chevr"/></svg><span><span data-i18n="nav.me">c-ID</span></span></div>
+<h1 data-i18n="m.h">c-ID</h1>
+<p class="lead" data-i18n="m.p">One ID for the whole Clive orbit. You get it by signing in with Telegram through @clivedubot, so every person has exactly one. Your number, your picture and your progress live inside it.</p>
 </div></section>
-<section class="band tight" style="padding-top:0"><div class="wrap me">
-<aside class="card pcard" data-reveal>
-<div class="avatar" id="av"><svg viewBox="0 0 64 64"><path d="M32.00 4.00 L40.20 12.20 L51.80 12.20 L51.80 23.80 L60.00 32.00 L51.80 40.20 L51.80 51.80 L40.20 51.80 L32.00 60.00 L23.80 51.80 L12.20 51.80 L12.20 40.20 L4.00 32.00 L12.20 23.80 L12.20 12.20 L23.80 12.20Z" fill="none" stroke="currentColor" stroke-width="3"/></svg><b id="av-i">C</b></div>
-<div class="avc" id="avc"><button data-av="blue" style="--c:var(--blue)" aria-label="blue"></button><button data-av="turq" style="--c:var(--turq)" aria-label="turq"></button><button data-av="gold" style="--c:var(--gold)" aria-label="gold"></button><button data-av="green" style="--c:var(--green)" aria-label="green"></button><button data-av="amber" style="--c:var(--amber)" aria-label="amber"></button><button data-av="rose" style="--c:var(--rose)" aria-label="rose"></button><button data-av="violet" style="--c:var(--violet)" aria-label="violet"></button></div>
-<label class="fl" style="text-align:left"><span class="small" style="font-weight:700"><span data-i18n="m.name">Your name</span></span><input class="input" id="pf-name" maxlength="40" autocomplete="nickname" placeholder="What should I call you?" data-i18n-attr="placeholder:m.name.ph"></label>
-<div style="text-align:left" class="field"><span class="small"><span data-i18n="m.goal">What brings you here?</span></span><div class="chk" id="goals"><button data-goal="learn-en" aria-pressed="false"><span data-i18n="m.g1">Learning English</span></button><button data-goal="learn-de" aria-pressed="false"><span data-i18n="m.g2">Learning German</span></button><button data-goal="focus" aria-pressed="false"><span data-i18n="m.g3">Focus & time</span></button><button data-goal="site" aria-pressed="false"><span data-i18n="m.g4">A website</span></button><button data-goal="look" aria-pressed="false"><span data-i18n="m.g5">Just looking</span></button></div></div>
-<p class="small faint" id="pf-since"></p>
-</aside>
+<section class="band tight" style="padding-top:0"><div class="wrap cidwrap">
+<div><div class="cidstage" id="cidstage"><div class="cidcard" id="cidcard" aria-label="c-ID card"></div></div>
+<p class="small faint cidhint" data-i18n="m.hint">Double-click or swipe the card to turn it over.</p></div>
+<div class="card cidside" id="cidside" aria-live="polite"></div>
+</div></section>
+<section class="band tight" style="padding-top:0"><div class="wrap">
 <div class="sect">
 <div class="card" data-reveal style="--c:var(--green)"><div class="row between"><h2><span data-i18n="m.f.h">Your focus</span></h2><a class="btn primary sm" href="vaqt/index.html" style="--c:var(--green);--ci:#03170d"><svg aria-hidden="true"><use href="#i-leaf"/></svg>Vaqt</a></div>
 <div class="grid stats4 mt2"><div class="kpi"><b id="st-today">0</b><span data-i18n="m.f1">minutes today</span></div><div class="kpi"><b id="st-total">0</b><span data-i18n="m.f2">minutes in total</span></div><div class="kpi"><b id="st-plants">0</b><span data-i18n="m.f3">plants grown</span></div><div class="kpi"><b id="st-streak">0</b><span data-i18n="m.f4">day streak</span></div></div></div>
@@ -88,7 +164,7 @@
 <div class="field"><span><span data-i18n="dr.accent">Accent colour</span></span><div class="swatches"><button data-set="accent=blue" style="--c:var(--blue)" aria-label="blue"></button><button data-set="accent=turq" style="--c:var(--turq)" aria-label="turq"></button><button data-set="accent=gold" style="--c:var(--gold)" aria-label="gold"></button><button data-set="accent=green" style="--c:var(--green)" aria-label="green"></button><button data-set="accent=amber" style="--c:var(--amber)" aria-label="amber"></button><button data-set="accent=rose" style="--c:var(--rose)" aria-label="rose"></button><button data-set="accent=violet" style="--c:var(--violet)" aria-label="violet"></button></div></div>
 </div></div>
 <div class="card" data-reveal><h2><span data-i18n="m.w.h">Saved words</span></h2><div class="words mt1" id="words"></div></div>
-<div class="card" data-reveal style="--c:var(--blue)"><h2><span data-i18n="m.s.h">Move to another device</span></h2>
+<div class="card" id="sync-card" data-reveal style="--c:var(--blue)"><h2><span data-i18n="m.s.h">Move to another device</span></h2>
 <p class="muted" data-i18n="m.s.p">Upload creates a private sync code. Type the same code on your other phone or computer to bring your profile, settings, words and Vaqt garden with you.</p>
 <div class="grid g2 mt2" style="align-items:end">
 <div class="field"><span><span data-i18n="m.s.mine">Your sync code</span></span><div class="code" id="sync-code">—</div><div class="row"><button class="btn primary sm" id="sync-up"><svg aria-hidden="true"><use href="#i-upload"/></svg><span data-i18n="m.s.up">Upload now</span></button><button class="btn ghost sm" id="sync-copy"><svg aria-hidden="true"><use href="#i-copy"/></svg><span data-i18n="m.s.cp">Copy code</span></button></div></div>
@@ -105,9 +181,9 @@
 <div><a class="brand" href="index.html"><svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="fmg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7C95FF"/><stop offset="1" stop-color="#A985FF"/></linearGradient><mask id="fmk"><rect width="64" height="64" fill="#fff"/><path d="M32 32 L66 13 L66 51 Z" fill="#000"/></mask></defs><g mask="url(#fmk)"><path d="M32.00 7.00 L39.32 14.32 L49.68 14.32 L49.68 24.68 L57.00 32.00 L49.68 39.32 L49.68 49.68 L39.32 49.68 L32.00 57.00 L24.68 49.68 L14.32 49.68 L14.32 39.32 L7.00 32.00 L14.32 24.68 L14.32 14.32 L24.68 14.32Z" fill="none" stroke="url(#fmg)" stroke-width="5.2" stroke-linejoin="round"/></g><circle cx="32" cy="32" r="6.2" fill="url(#fmg)"/><ellipse cx="32" cy="32" rx="30" ry="9.5" transform="rotate(-20 32 32)" fill="none" stroke="url(#fmg)" stroke-width="1.8" opacity=".75"/><circle cx="57.6" cy="22.4" r="3.6" fill="#F5C04A"/></svg><span>Clive</span></a>
 <p class="muted mt1" style="max-width:34ch"><span data-i18n="ft.about">Teacher, web developer and maker of digital products. Building in Uzbekistan, for phones first.</span></p>
 <p class="small faint mt1"><span data-i18n="ft.time">Tashkent time</span> · <span class="num" data-tash-clock>--:--</span></p></div>
-<div><h4><span data-i18n="ft.products">Products</span></h4><ul><li><a href="products/vaqt.html">Vaqt</a></li><li><a href="products/clivedu.html">ClivEdu</a></li><li><a href="products/class.html">ClivEdu Class</a></li><li><a href="products/sprachwerk.html">Sprachwerk</a></li><li><a href="products/vault-studio.html">Vault Studio</a></li></ul></div>
+<div><h4><span data-i18n="ft.products">Products</span></h4><ul><li><a href="products/vaqt.html">Vaqt</a></li><li><a href="products/clivedu.html">ClivEdu</a></li><li><a href="products/class.html">ClivEdu Class</a></li><li><a href="products/sprachwerk.html">Sprachwerk</a></li><li><a href="products/vault-studio.html">Vault Studio</a></li><li><a href="products/reja.html">Reja</a></li></ul></div>
 <div><h4><span data-i18n="ft.explore">Explore</span></h4><ul><li><a href="ecosystem.html"><span data-i18n="nav.orbit">Orbit</span></a></li><li><a href="work.html"><span data-i18n="nav.work">Work</span></a></li><li><a href="learn.html"><span data-i18n="nav.learn">Learn</span></a></li><li><a href="journal.html"><span data-i18n="nav.journal">Journal</span></a></li><li><a href="shop.html"><span data-i18n="nav.shop">Shop</span></a></li><li><a href="brand.html"><span data-i18n="nav.brand">Brand kit</span></a></li></ul></div>
-<div><h4><span data-i18n="ft.me">Me</span></h4><ul><li><a href="about.html"><span data-i18n="nav.about">About</span></a></li><li><a href="contact.html"><span data-i18n="nav.contact">Contact</span></a></li><li><a href="me.html"><span data-i18n="nav.me">Clive ID</span></a></li><li><a href="links.html"><span data-i18n="nav.links">Links</span></a></li>
+<div><h4><span data-i18n="ft.me">Me</span></h4><ul><li><a href="about.html"><span data-i18n="nav.about">About</span></a></li><li><a href="contact.html"><span data-i18n="nav.contact">Contact</span></a></li><li><a href="me.html"><span data-i18n="nav.me">c-ID</span></a></li><li><a href="links.html"><span data-i18n="nav.links">Links</span></a></li>
 <li><a href="https://t.me/clive077" target="_blank" rel="noopener">Telegram</a></li><li><a href="https://github.com/ClivEdudev" target="_blank" rel="noopener">GitHub</a></li></ul></div>
 </div>
 <div class="big" aria-hidden="true">Clive.</div>
@@ -118,6 +194,7 @@
 <nav><a href="index.html"><span data-i18n="nav.home">Home</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a><a href="ecosystem.html"><span data-i18n="nav.orbit">Orbit</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a><a href="work.html"><span data-i18n="nav.work">Work</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a><a href="learn.html"><span data-i18n="nav.learn">Learn</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a><a href="journal.html"><span data-i18n="nav.journal">Journal</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a><a href="shop.html"><span data-i18n="nav.shop">Shop</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a><a href="about.html"><span data-i18n="nav.about">About</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a><a href="contact.html"><span data-i18n="nav.contact">Contact</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a></nav>
 <div class="foot">
 <a class="btn primary block navfocus" href="vaqt/index.html"><svg aria-hidden="true"><use href="#i-leaf"/></svg><span data-i18n="sheet.focus">Open Vaqt, the focus garden</span></a>
+<a class="btn ghost block" href="reja/" style="--c:var(--violet)"><svg aria-hidden="true"><use href="#i-calendar"/></svg><span data-i18n="sheet.reja">Open Reja, the study planner</span></a>
 <div class="row"><div class="langsel" role="group" aria-label="Language"><button data-setlang="en">EN</button><button data-setlang="uz">UZ</button><button data-setlang="ru">RU</button></div>
 <button class="btn ghost sm" data-open="drawer"><svg aria-hidden="true"><use href="#i-sliders"/></svg><span data-i18n="a.settings">Settings</span></button>
 <button class="btn ghost sm" data-open="cmdk" data-close="sheet"><svg aria-hidden="true"><use href="#i-search"/></svg><span data-i18n="a.search2">Search</span></button></div>
@@ -129,13 +206,13 @@
 <div class="field"><span><span data-i18n="dr.lang">Language</span></span><div class="seg"><button data-setlang="en">English</button><button data-setlang="uz">O‘zbekcha</button><button data-setlang="ru">Русский</button></div></div>
 <div class="field"><span><span data-i18n="dr.motion">Motion</span></span><div class="seg"><button data-set="motion=full"><span data-i18n="dr.full">Full</span></button><button data-set="motion=reduced"><span data-i18n="dr.calm">Calm</span></button></div></div>
 <div class="field"><span><span data-i18n="dr.size">Text size</span></span><div class="seg"><button data-set="fs=0.92" aria-label="smaller">A−</button><button data-set="fs=1">A</button><button data-set="fs=1.1" aria-label="larger">A+</button></div></div>
-<a class="card glow" href="me.html" style="--c:var(--acc)"><div class="row" style="flex-wrap:nowrap"><span class="ico" style="margin:0"><svg aria-hidden="true"><use href="#i-id"/></svg></span><div><b>Clive ID</b><p class="small" style="margin:0"><span data-i18n="dr.id">Your profile, focus stats and sync code</span></p></div></div></a>
+<a class="card glow" href="me.html" style="--c:var(--acc)"><div class="row" style="flex-wrap:nowrap"><span class="ico" style="margin:0"><svg aria-hidden="true"><use href="#i-id"/></svg></span><div><b>c-ID</b><p class="small" style="margin:0"><span data-i18n="dr.id">Your galaxy ID card: one sign-in for everything Clive</span></p></div></div></a>
 <p class="small faint"><span data-i18n="dr.keys" data-html>Press <span class="kbd">/</span> or <span class="kbd">Ctrl K</span> to search. Type “clive” anywhere for a surprise.</span></p>
 </div></aside><div class="cmdk" id="cmdk" role="dialog" aria-modal="true" aria-label="Search">
 <div class="q"><svg aria-hidden="true"><use href="#i-search"/></svg><input type="text" autocomplete="off" spellcheck="false" placeholder="Search pages, products, actions…" data-i18n-attr="placeholder:cmd.ph" aria-label="Search"><span class="kbd">Esc</span></div>
 <ul role="listbox"></ul></div><div class="scrim" id="scrim"></div>
 <script src="assets/js/i18n.js"></script>
-<script src="assets/js/core.js"></script>
-<script src="assets/js/me.js"></script>
+<script src="assets/js/core.js"></script><script src="assets/js/cidsync.js"></script>
+<script src="assets/js/me.js"></script><script src="assets/js/cid.js"></script>
 </body>
 </html>
