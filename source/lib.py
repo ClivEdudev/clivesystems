@@ -211,7 +211,7 @@ NAV = [
  ('shop', 'nav.shop', 'Shop', 'Do‘kon', 'Магазин', 'shop.html', 'bag'),
  ('about', 'nav.about', 'About', 'Men haqimda', 'Обо мне', 'about.html', 'user'),
 ]
-for _ in [('nav.contact','Contact','Aloqa','Контакты'),('nav.me','Clive ID','Clive ID','Clive ID'),('nav.brand','Brand kit','Brend to‘plami','Бренд-кит'),('nav.links','Links','Havolalar','Ссылки')]:
+for _ in [('nav.contact','Contact','Aloqa','Контакты'),('nav.me','c-ID','c-ID','c-ID'),('nav.brand','Brand kit','Brend to‘plami','Бренд-кит'),('nav.links','Links','Havolalar','Ссылки')]:
     _reg(*_); JS_KEYS.add(_[0])
 for n in NAV: JS_KEYS.add(n[1])
 
@@ -253,7 +253,7 @@ def drawer(root):
 <div class="field"><span>{T('dr.lang','Language','Til','Язык')}</span><div class="seg"><button data-setlang="en">English</button><button data-setlang="uz">O‘zbekcha</button><button data-setlang="ru">Русский</button></div></div>
 <div class="field"><span>{T('dr.motion','Motion','Harakat','Анимация')}</span><div class="seg"><button data-set="motion=full">{T('dr.full','Full','To‘liq','Полная')}</button><button data-set="motion=reduced">{T('dr.calm','Calm','Sokin','Спокойная')}</button></div></div>
 <div class="field"><span>{T('dr.size','Text size','Matn o‘lchami','Размер текста')}</span><div class="seg"><button data-set="fs=0.92" aria-label="smaller">A−</button><button data-set="fs=1">A</button><button data-set="fs=1.1" aria-label="larger">A+</button></div></div>
-<a class="card glow" href="{root}me.html" style="--c:var(--acc)"><div class="row" style="flex-wrap:nowrap"><span class="ico" style="margin:0">{ic('id')}</span><div><b>Clive ID</b><p class="small" style="margin:0">{T('dr.id','Your profile, focus stats and sync code','Profilingiz, fokus statistikasi va sinxron kod','Ваш профиль, статистика фокуса и код синхронизации')}</p></div></div></a>
+<a class="card glow" href="{root}me.html" style="--c:var(--acc)"><div class="row" style="flex-wrap:nowrap"><span class="ico" style="margin:0">{ic('id')}</span><div><b>c-ID</b><p class="small" style="margin:0">{T('dr.id','Your galaxy ID card: one sign-in for everything Clive','Galaktik ID kartangiz: Clive’ning hammasi uchun bitta kirish','Ваша галактическая ID-карта: один вход для всего Clive')}</p></div></div></a>
 <p class="small faint">{T('dr.keys','Press <span class="kbd">/</span> or <span class="kbd">Ctrl K</span> to search. Type “clive” anywhere for a surprise.','Qidirish uchun <span class="kbd">/</span> yoki <span class="kbd">Ctrl K</span> ni bosing. Istalgan joyda “clive” deb yozing — kutilmagan sovg‘a bor.','Нажмите <span class="kbd">/</span> или <span class="kbd">Ctrl K</span> для поиска. Наберите «clive» где угодно — будет сюрприз.')}</p>
 </div></aside>'''
 
@@ -277,7 +277,7 @@ def footer(root):
 <p class="small faint mt1">{T('ft.time','Tashkent time','Toshkent vaqti','Время в Ташкенте')} · <span class="num" data-tash-clock>--:--</span></p></div>
 <div><h4>{T('ft.products','Products','Mahsulotlar','Продукты')}</h4><ul>{prods}</ul></div>
 <div><h4>{T('ft.explore','Explore','Ko‘rish','Обзор')}</h4><ul>{P('nav.orbit','Orbit','Orbita','Орбита','ecosystem.html')}{P('nav.work','Work','Ishlar','Работы','work.html')}{P('nav.learn','Learn','O‘rganish','Учёба','learn.html')}{P('nav.journal','Journal','Kundalik','Дневник','journal.html')}{P('nav.shop','Shop','Do‘kon','Магазин','shop.html')}{P('nav.brand','Brand kit','Brend to‘plami','Бренд-кит','brand.html')}</ul></div>
-<div><h4>{T('ft.me','Me','Men','Я')}</h4><ul>{P('nav.about','About','Men haqimda','Обо мне','about.html')}{P('nav.contact','Contact','Aloqa','Контакты','contact.html')}{P('nav.me','Clive ID','Clive ID','Clive ID','me.html')}{P('nav.links','Links','Havolalar','Ссылки','links.html')}
+<div><h4>{T('ft.me','Me','Men','Я')}</h4><ul>{P('nav.about','About','Men haqimda','Обо мне','about.html')}{P('nav.contact','Contact','Aloqa','Контакты','contact.html')}{P('nav.me','c-ID','c-ID','c-ID','me.html')}{P('nav.links','Links','Havolalar','Ссылки','links.html')}
 <li><a href="{TG}" target="_blank" rel="noopener">Telegram</a></li><li><a href="{GH}" target="_blank" rel="noopener">GitHub</a></li></ul></div>
 </div>
 <div class="big" aria-hidden="true">Clive.</div>
@@ -326,7 +326,7 @@ def page(slug, root, tkey, title_en, title_uz, title_ru, desc, body, css='', scr
 {foot}
 {sh}{drawer(root)}{cmdk()}<div class="scrim" id="scrim"></div>
 <script src="{root}assets/js/i18n.js"></script>
-<script src="{root}assets/js/core.js"></script>
+<script src="{root}assets/js/core.js"></script><script src="{root}assets/js/cidsync.js"></script>
 {js}
 </body>
 </html>

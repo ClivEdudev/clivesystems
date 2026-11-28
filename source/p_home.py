@@ -184,7 +184,7 @@ def body():
 </div></section>'''
 
     J('w.save','Save word','So‘zni saqlash','Сохранить слово')
-    J('w.saved','Saved to your Clive ID','Clive ID’ingizga saqlandi','Сохранено в ваш Clive ID')
+    J('w.saved','Saved to your c-ID','c-ID’ingizga saqlandi','Сохранено в ваш c-ID')
     J('w.listen','Listen','Tinglash','Слушать')
     wotd = f'''<section class="band"><div class="wrap">
 <div class="card" style="padding:clamp(22px,4vw,48px)"><div class="wotd">
