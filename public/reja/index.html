@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reja · study & life planner</title>
+<meta name="description" content="Reja: a study and life planner with a real calendar, an alternating-week timetable, deadlines with files, reminders and notes you can take during class.">
+<meta name="theme-color" content="#0B0E1E">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="reja.css?v=2">
+</head>
+<body>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<header class="top">
+  <a class="brand" href="./" aria-label="Reja home">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="rg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8B7CFF"/><stop offset="1" stop-color="#2EE6C5"/></linearGradient></defs><rect x="3" y="5" width="34" height="31" rx="9" fill="url(#rg)"/><rect x="3" y="5" width="34" height="9" rx="4" fill="#fff" opacity=".22"/><path d="M12 3v6M28 3v6" stroke="#fff" stroke-width="3" stroke-linecap="round"/><path d="M13 23l5 5 9-10" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span><b>Reja</b><small>study &amp; life</small></span>
+  </a>
+  <nav class="tabs" id="tabs" aria-label="Sections"></nav>
+  <div class="tools">
+    <button class="ib" id="search-btn" title="Search (/)" aria-label="Search"></button>
+    <button class="ib" id="theme-btn" title="Light or dark" aria-label="Light or dark"></button>
+  </div>
+</header>
+<main id="main" tabindex="-1"></main>
+<nav class="bottom" id="bottom" aria-label="Sections"></nav>
+<button class="fab" id="fab" aria-label="Add" title="Add (N)"></button>
+<div class="fabmenu" id="fabmenu" hidden></div>
+<div class="scrim" id="scrim" hidden></div>
+<aside class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" hidden></aside>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<input type="file" id="file-in" multiple hidden>
+<input type="file" id="backup-in" accept="application/json,.json" hidden>
+<script src="reja.js?v=2"></script>
+</body>
+</html>
