@@ -189,7 +189,7 @@ S = [
  ('v.p.confetti','Celebrate finished sessions','Tugagan sessiyalarni nishonlash','Праздновать завершённые сессии'),
  ('v.p.tags','Tags','Teglar','Теги'),('v.p.addtag','Add tag','Teg qo‘shish','Добавить тег'),('v.p.tagname','Tag name','Teg nomi','Название тега'),
  ('v.p.data','Your data','Ma’lumotlaringiz','Ваши данные'),
- ('v.p.data.p','Everything is saved in this browser. Back it up, or move it with your Clive ID sync code.','Hammasi shu brauzerda saqlanadi. Zaxira oling yoki Clive ID sinxron kodi bilan ko‘chiring.','Всё хранится в этом браузере. Сделайте копию или перенесите кодом Clive ID.'),
+ ('v.p.data.p','Everything is saved in this browser. Sign in with your c-ID and it follows you to every device, or back it up.','Hammasi shu brauzerda saqlanadi. c-ID bilan kirsangiz, har bir qurilmada siz bilan bo‘ladi, yoki zaxira oling.','Всё хранится в этом браузере. Войдите с c-ID, и всё будет на любом устройстве, или сделайте копию.'),
  ('v.p.clear','Clear Vaqt data','Vaqt ma’lumotlarini tozalash','Очистить данные Vaqt'),
  ('v.p.clear.q','This deletes every session, task, coin and award in Vaqt on this device. It can’t be undone.','Bu qurilmadagi Vaqt’ning barcha sessiya, vazifa, tanga va yutuqlarini o‘chiradi. Qaytarib bo‘lmaydi.','Это удалит все сессии, задачи, монеты и награды Vaqt на этом устройстве. Отменить нельзя.'),
  ('v.p.clear.y','Delete everything','Hammasini o‘chirish','Удалить всё'),('v.p.keep','Keep it','Qoldirish','Оставить'),
@@ -462,7 +462,7 @@ def html():
 <div class="seg"><button data-set="motion=full">{T('dr.full','Full','To‘liq','Полная')}</button><button data-set="motion=reduced">{T('dr.calm','Calm','Sokin','Спокойная')}</button></div>
 <button class="btn ghost sm" id="p-tour">{ic('sparkle')}<span data-i18n="v.p.tour">Show the welcome tour again</span></button>
 <h3 class="mt2" data-i18n="v.p.data">Your data</h3><p class="small muted" data-i18n="v.p.data.p">Everything is saved in this browser.</p>
-<div class="row"><a class="btn ghost sm" href="{R}me.html">{ic('id')}Clive ID</a><button class="btn ghost sm" id="p-clear">{ic('trash')}<span data-i18n="v.p.clear">Clear Vaqt data</span></button></div>
+<div class="row"><a class="btn ghost sm" href="{R}me.html">{ic('id')}c-ID</a><button class="btn ghost sm" id="p-clear">{ic('trash')}<span data-i18n="v.p.clear">Clear Vaqt data</span></button></div>
 <div class="confirm" id="p-clearbox" role="alert"><span data-i18n="v.p.clear.q">This deletes every session.</span><button class="btn primary sm" id="p-clear-y" style="--c:var(--rose)" data-i18n="v.p.clear.y">Delete everything</button><button class="btn ghost sm" id="p-clear-n" data-i18n="v.p.keep">Keep it</button></div>
 </div></div>
 </section>
@@ -496,7 +496,7 @@ def html():
     out = page('vaqt', R, 'pt.vaqt', 'Vaqt · focus garden', 'Vaqt · fokus bog‘i', 'Vaqt · сад фокуса',
                'Vaqt: a focus timer and time tracker that grows an Uzbek garden. 34 plants, a bazaar, 57 awards. Free, offline, in English, Uzbek and Russian.',
                body, '', ['assets/js/garden.js', 'vaqt/catalog.js', 'vaqt/vaqt.js'], bare=True, extra_head=head_extra)
-    for a in ('assets/css/core.css', 'assets/js/i18n.js', 'assets/js/core.js', 'assets/js/garden.js', 'vaqt/catalog.js', 'vaqt/vaqt.js'):
+    for a in ('assets/css/core.css', 'assets/js/i18n.js', 'assets/js/core.js', 'assets/js/cidsync.js', 'assets/js/garden.js', 'vaqt/catalog.js', 'vaqt/vaqt.js'):
         out = out.replace(R + a + '"', R + a + '?v=' + ASSET_V + '"')
     out = out.replace('href="vaqt.css"', 'href="vaqt.css?v=' + ASSET_V + '"')
     out = out.replace('<link rel="manifest" href="../site.webmanifest">', '')
